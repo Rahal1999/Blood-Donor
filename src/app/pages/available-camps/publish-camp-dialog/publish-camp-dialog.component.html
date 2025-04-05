@@ -1,0 +1,37 @@
+<div class="header">
+	<h2 mat-dialog-title>Publish Camp</h2>
+</div>
+
+<div mat-dialog-content class="content">
+	<form [formGroup]="campForm">
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>Full Name of Organizer</mat-label>
+			<input matInput formControlName="organizerName" />
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>Camp Location</mat-label>
+			<input matInput formControlName="location" />
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>Date of Camp</mat-label>
+			<input matInput type="date" formControlName="date" />
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>District</mat-label>
+			<input matInput formControlName="district" />
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>City</mat-label>
+			<input matInput formControlName="city" />
+		</mat-form-field>
+	</form>
+</div>
+
+<div mat-dialog-actions align="end" class="footer">
+	<button mat-button (click)="onCancel()">Cancel</button>
+	<button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="campForm.invalid">Publish</button>
+</div>

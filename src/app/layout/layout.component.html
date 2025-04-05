@@ -1,0 +1,21 @@
+<div class="row sidebar">
+	<div class="col sidebar-left-col">
+		<div class="profile">
+			<img src="assets/images/profile.jpg" alt="User Image" class="profile-img" />
+			<p class="username">Devin Rajapakse</p>
+		</div>
+
+		<nav>
+			<ul>
+				<li (click)="navigateTo('/home')">Dashboard</li>
+				<li (click)="navigateTo('/notifications')">Notifications</li>
+				<li (click)="navigateTo('/settings')">Settings</li>
+				<li (click)="navigateTo('/login')">Logout</li>
+			</ul>
+		</nav>
+	</div>
+
+	<div class="col page-content">
+		<router-outlet></router-outlet>
+	</div>
+</div>

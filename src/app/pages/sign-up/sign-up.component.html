@@ -1,0 +1,45 @@
+<div class="main-container">
+    <h2>Sign-up as a Donor in DonorConnect</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="sub-container">
+
+        <mat-form-field appearance="outline" class="seeyou-input no-subscript">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="seeyou-input no-subscript">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="seeyou-input no-subscript">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="seeyou-input no-subscript">
+            <mat-label>NIC</mat-label>
+            <input matInput formControlName="nic">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="seeyou-input no-subscript">
+            <mat-label>Blood Group</mat-label>
+            <input matInput formControlName="bloodGroup">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="seeyou-input no-subscript">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput type="date" formControlName="dob">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="seeyou-input no-subscript">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+        </mat-form-field>
+
+        <button mat-flat-button class="seeyou-btn primary medium" type="submit" [disabled]="form.invalid">
+            Sign Up
+        </button>
+    </form>
+</div>

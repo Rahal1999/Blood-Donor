@@ -1,0 +1,76 @@
+/* Container Styling */
+.container {
+	height: calc(100dvh - 120px);
+	overflow-y: scroll;
+	padding: 20px;
+	text-align: center;
+}
+
+/* Heading */
+.heading {
+	font-size: 24px;
+	color: #333;
+	padding: 20px;
+	margin: 0px;
+}
+
+/* Grid Layout */
+.camps-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	/* Auto-adjusting columns */
+	gap: 20px;
+	justify-content: center;
+}
+
+/* Camp Card */
+.camp-card {
+	background: linear-gradient(to bottom right, #1e1d33, #104eff);
+	color: white;
+	padding: 15px;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	text-align: left;
+	transition: transform 0.2s ease-in-out;
+}
+
+.camp-card:hover {
+	transform: scale(1.05);
+}
+
+/* Card Heading */
+.camp-card h3 {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+/* Card Text */
+.camp-card p {
+	margin: 5px 0;
+	font-size: 14px;
+}
+
+/* Appointment Button */
+.camp-card button {
+	width: 100%;
+	background-color: white;
+	color: #1e3a8a;
+	border: none;
+	padding: 8px;
+	margin-top: 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.camp-card button:hover {
+	background-color: #e5e7eb;
+}
+
+.booked-label {
+	font-weight: bold;
+	color: green;
+	display: block;
+	text-align: center;
+	margin-top: 10px;
+}

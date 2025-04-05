@@ -1,0 +1,29 @@
+.main{
+    padding: 24px;
+}
+
+.speaker-icon{
+    color: red; 
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.option{
+    border-radius: 8px;
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+}
+
+.section{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}

@@ -1,0 +1,25 @@
+.login-container {
+	text-align: center;
+	width: 300px;
+	margin: auto;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+}
+
+mat-form-field {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.signup-links {
+	margin-top: 10px;
+}
+
+.main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}

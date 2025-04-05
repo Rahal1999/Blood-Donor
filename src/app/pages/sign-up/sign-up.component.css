@@ -1,0 +1,45 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.sub-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.seeyou-input {
+    width: 100%;
+}
+
+.seeyou-btn {
+    width: 100%;
+    background-color: #e53935;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.seeyou-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+

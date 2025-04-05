@@ -1,0 +1,23 @@
+<div class="main">
+	<div class="login-container">
+		<h2>Login</h2>
+
+		<form [formGroup]="loginForm">
+			<mat-form-field appearance="outline">
+				<mat-label>Username</mat-label>
+				<input matInput formControlName="username" />
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Password</mat-label>
+				<input matInput type="password" formControlName="password" />
+			</mat-form-field>
+
+			<button mat-raised-button color="primary" (click)="login()" [disabled]="loginForm.invalid">Login</button>
+
+			<div class="signup-links">
+				<button mat-button color="accent" (click)="onSignUp()">Sign Up</button>
+			</div>
+		</form>
+	</div>
+</div>
