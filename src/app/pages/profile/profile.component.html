@@ -1,1 +1,36 @@
-<p>profile works!</p>
+<div class="profile-container">
+
+	<div class="main-profile">
+	  <div class="header">
+		<h2>My Profile</h2>
+		<p>Welcome, Devin!</p>
+		<button class="history-btn">View my history 🕒</button>
+	  </div>
+  
+	  <div class="progress-card">
+		<p>You have 60 days for your next donation</p>
+		<div class="progress-bar">
+		  <div class="filled" style="width: 30%"></div>
+		</div>
+		<p>30%</p>
+	  </div>
+  
+	  <div class="summary">
+		<h3>Summary</h3>
+		<div class="chart-placeholder">[Insert chart here]</div>
+		<p>You have done your after-care routine for 07 days well. Heres a summary of your week!</p>
+	  </div>
+  
+	  <div class="achievements">
+		<h3>Achievements</h3>
+		<div class="icons">
+		  <div class="achievement-icon" *ngFor="let i of [1,2,3,4,5,6,7,8]">🏆</div>
+		</div>
+		<button class="view-all">View all achievements</button>
+	  </div>
+
+  	</div>
+  
+
+</div>
+  

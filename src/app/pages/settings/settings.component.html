@@ -1,0 +1,66 @@
+<!-- settings.component.html -->
+<div class="settings-page">
+	<h2>Settings</h2>
+  
+	<div class="profile-section">
+	  <div class="profile-picture">
+		<img src="/img/give blood.png" alt="Profile Picture" />
+	  </div>
+	  <div class="profile-info">
+		<h3>Devin Rajapakse</h3>
+		<p>Regular Donor</p>
+	  </div>
+	  <div class="blood-type">
+		<img src="/img/2.jpeg" alt="Blood Icon" />
+		<span>Blood Type: B+</span>
+	  </div>
+	</div>
+  
+	<hr />
+  
+	<div class="edit-profile">
+	  <h3>Edit Profile <span class="arrow">▼</span></h3>
+	  <div class="edit-fields">
+		<div class="field">
+		  <label>Name</label>
+		  <input type="text" placeholder="Devin Rajapakse" />
+		</div>
+		<div class="field">
+		  <label>Contact Number</label>
+		  <input type="text" placeholder="07XXXXXXXX" />
+		</div>
+		<div class="field">
+		  <label>Address</label>
+		  <input type="text" placeholder="Address" />
+		</div>
+		<div class="field">
+		  <label>Date of Birth</label>
+		  <input type="date" />
+		</div>
+		<div class="field">
+		  <label>Age</label>
+		  <input type="number" />
+		</div>
+	  </div>
+	</div>
+  
+	<div class="change-password">
+	  <h3>Change Password <span class="arrow">▼</span></h3>
+		<div class="field">
+			<label>Old Password</label>
+			<input type="password" />
+		</div>
+		<div class="field">
+			<label>New Password</label>
+			<input type="password" />
+		</div>
+		<div class="field">
+			<label>Confirm Password</label>
+			<input type="password" />
+		</div>
+	</div>
+
+	<button class="back-button" (click)="goBackToHome()">← Back to Home</button>
+
+  </div>
+  

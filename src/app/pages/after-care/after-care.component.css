@@ -1,0 +1,45 @@
+.after-care-container {
+	padding: 20px;
+	background: #e0e0e0;
+  }
+  
+  .accordion {
+	background-color: #4b50d0;
+	color: white;
+	padding: 12px;
+	margin-bottom: 8px;
+	cursor: pointer;
+	border-radius: 5px;
+  }
+  
+  .checklist {
+	background-color: #fefee0;
+	padding: 10px 20px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+  }
+  
+  .arrow {
+	float: right;
+  }
+  
+  .action-buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+  }
+  
+  .back-btn,
+  .submit-btn {
+	background-color: #e74c3c;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 8px;
+	cursor: pointer;
+  }
+  
+  .submit-btn {
+	background-color: #2ecc71;
+  }
+  

@@ -23,3 +23,15 @@ mat-form-field {
 	height: 100%;
 	width: 100%;
 }
+
+.signup-links {
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+	margin-top: 16px;
+  }
+  
+  .signup-links button {
+	min-width: 120px;
+  }
+  

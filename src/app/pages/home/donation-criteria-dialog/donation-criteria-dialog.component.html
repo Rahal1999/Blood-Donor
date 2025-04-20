@@ -1,0 +1,26 @@
+<h2 class="title">Donation Criteria</h2>
+<form>
+  <input #ageInput placeholder="Age" type="number" />
+  <input #weightInput placeholder="Weight" type="number" />
+  <p>Date of Last Donation</p>
+  <input #donationDateInput type="date" placeholder="Date of Last Donation" />
+  <input #nicInput placeholder="NIC Number" type="text" />
+
+  <select #tattooInput>
+    <option disabled selected value="">Have you had a tattoo/piercing within 06 months</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <select #pregnantInput>
+    <option disabled selected value="">Are you Pregnant/Breastfeeding?</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select>
+
+  <button type="button"
+    (click)="onSubmit(ageInput.value, weightInput.value, tattooInput.value, pregnantInput.value)">
+    Submit
+  </button>
+  <button type="button" (click)="onClose()">Back</button>
+</form>

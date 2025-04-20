@@ -29,9 +29,14 @@ export class LoginComponent {
 
 	loginForm: FormGroup;
 
-	onSignUp(): void {
-		this.router.navigate(['/sign-up']);
+	onSignUp(role: 'donor' | 'organizer') {
+		if (role === 'donor') {
+		  this.router.navigate(['/donor-signup']);
+		} else if (role === 'organizer') {
+		  this.router.navigate(['/organizer-signup']);
+		}
 	}
+	  
 
 	login() {
 		const { username, password } = this.loginForm.value;

@@ -1,0 +1,97 @@
+.profile-container {
+	display: flex;
+	height: 100vh;
+  }
+  
+  .sidebar {
+	width: 220px;
+	background-color: #2f2e96;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem;
+  }
+  
+  .sidebar nav {
+	margin-top: 1rem;
+	width: 100%;
+  }
+  
+  .sidebar nav a {
+	display: block;
+	padding: 10px;
+	color: white;
+	text-decoration: none;
+  }
+  
+  .sidebar nav a.active {
+	font-weight: bold;
+  }
+  
+  .profile-img {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+  }
+  
+  .main-profile {
+	flex: 1;
+	padding: 2rem;
+	background-color: #f2f2f2;
+  }
+  
+  .header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  
+  .progress-card {
+	background-color: #c4c4ff;
+	padding: 1rem;
+	margin-top: 1rem;
+	border-radius: 10px;
+  }
+  
+  .progress-bar {
+	height: 10px;
+	width: 100%;
+	background-color: white;
+	margin: 0.5rem 0;
+	border-radius: 5px;
+  }
+  
+  .filled {
+	height: 10px;
+	background-color: #4caf50;
+	border-radius: 5px;
+  }
+  
+  .summary, .achievements {
+	margin-top: 2rem;
+  }
+  
+  .chart-placeholder {
+	background-color: #7070ff;
+	height: 150px;
+	margin-bottom: 0.5rem;
+  }
+  
+  .icons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+  }
+  
+  .achievement-icon {
+	width: 50px;
+	height: 50px;
+	background-color: red;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
+  }
+  

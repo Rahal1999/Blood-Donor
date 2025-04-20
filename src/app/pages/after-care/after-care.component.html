@@ -1,1 +1,37 @@
-<p>after-care works!</p>
+<div class="after-care-container">
+	<div *ngFor="let day of days; let d = index">
+	  <div class="accordion" (click)="toggleExpand(day)">
+		{{ day.title }}
+		<span class="arrow">{{ day.expanded ? '▲' : '▼' }}</span>
+	  </div>
+  
+	  <div *ngIf="day.expanded" class="checklist">
+		<div>
+		  <label>
+			Drank
+			<input
+			  type="number"
+			  min="0"
+			  [(ngModel)]="day.checks.waterAmount"
+			  style="width: 60px; margin: 0 5px;"
+			/>
+			ounces of water
+		  </label>
+		</div>
+  
+		<div *ngFor="let item of careChecklist.slice(1); let i = index">
+		  <input
+			type="checkbox"
+			[(ngModel)]="day.checks.checkboxes[i]"
+		  />
+		  {{ item.label }}
+		</div>
+	  </div>
+	</div>
+  
+	<div class="action-buttons">
+	  <button class="back-btn" routerLink="/home">Back</button>
+	  <button class="submit-btn" (click)="submitAfterCare()">Submit</button>
+	</div>
+  </div>
+  
