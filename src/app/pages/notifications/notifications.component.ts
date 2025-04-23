@@ -1,5 +1,6 @@
+import { Component, OnInit } from '@angular/core';
+import { NotificationService } from '../available-camps/services/notification.service';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-notifications',
@@ -8,15 +9,31 @@ import { Component } from '@angular/core';
   templateUrl: './notifications.component.html',
   styleUrl: './notifications.component.css'
 })
-export class NotificationsComponent {
+export class NotificationsComponent implements OnInit {
+  notifications: { message: string; time: string }[] = [];
+  userName: string = ''; // Store the user's name
 
+  constructor(private notificationService: NotificationService) {}
 
+  ngOnInit() {
+    // Retrieve the user's name from localStorage
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      this.userName = parsedUser.fullName || parsedUser.username || 'User'; // Use 'User' if no name is found
+    }
 
-  notifications = [
-  { message: "Your camp has been published successfully.", time: "Now" },
-  { message: "Devin wants to make an appointment.", time: "10 Mins ago" },
-  { message: "Your profile information was updated.", time: "1 Hour ago" },
-  { message: "New camp is available in your area.", time: "3 Hours ago" }
-];
-
+    // Retrieve user role and set notification service's user type
+    const role = localStorage.getItem('userRole'); // 'donor' or 'organizer'
+    this.notificationService.setUserType(role === 'organizer' ? 'organizer' : 'donor');
+  
+    // Subscribe to notifications
+    this.notificationService.notifications$.subscribe((data) => {
+      this.notifications = data;
+    });
+  }
+  
+  clearAll() {
+    this.notificationService.clearNotifications();
+  }
 }

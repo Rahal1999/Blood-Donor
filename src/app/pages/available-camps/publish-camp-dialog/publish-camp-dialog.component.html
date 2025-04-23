@@ -28,6 +28,26 @@
 			<mat-label>City</mat-label>
 			<input matInput formControlName="city" />
 		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>Time</mat-label>
+			<input matInput formControlName="Time" />
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>Number of Slots</mat-label>
+			<input matInput type="number" min="1" formControlName="slots" />
+		</mat-form-field>
+		
+		<mat-form-field appearance="outline" class="full-width">
+			<mat-label>Preffered Blood Groups</mat-label>
+			<mat-select formControlName="bloodGroups" multiple>
+				<mat-option *ngFor="let group of ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']" [value]="group">
+					{{ group }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		
 	</form>
 </div>
 

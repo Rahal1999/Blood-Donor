@@ -1,9 +1,12 @@
 <h2 class="title">Donation Criteria</h2>
 <form>
   <input #ageInput placeholder="Age" type="number" />
+ 
   <input #weightInput placeholder="Weight" type="number" />
+  
   <p>Date of Last Donation</p>
   <input #donationDateInput type="date" placeholder="Date of Last Donation" />
+ 
   <input #nicInput placeholder="NIC Number" type="text" />
 
   <select #tattooInput>
@@ -18,9 +21,7 @@
     <option value="no">No</option>
   </select>
 
-  <button type="button"
-    (click)="onSubmit(ageInput.value, weightInput.value, tattooInput.value, pregnantInput.value)">
-    Submit
-  </button>
+  <button (click)="onSubmit(ageInput.value, weightInput.value, tattooInput.value, pregnantInput.value, donationDateInput.value)">Submit</button>
+
   <button type="button" (click)="onClose()">Back</button>
 </form>

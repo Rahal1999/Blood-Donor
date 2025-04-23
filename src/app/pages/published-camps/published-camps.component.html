@@ -1,20 +1,26 @@
 <div class="published-camp-container">
 	<h2>Published Camp Details</h2>
   
-	<div *ngFor="let camp of camps" class="camp-card">
+	<div *ngFor="let camp of camps; let i = index" class="camp-card">
 	  <h3>Camp Details</h3>
 	  <p><strong>Location:</strong> {{ camp.location }}</p>
 	  <p><strong>Date:</strong> {{ camp.date }}</p>
-	  <p><strong>Time:</strong> {{ camp.time }}</p>
+	  <p><strong>District:</strong> {{ camp.district }}</p>
+	  <p><strong>City:</strong> {{ camp.city }}</p>
+	  <p><strong>Slots:</strong> {{ camp.slots }}</p>
+	  <p><strong>Blood Groups:</strong> {{ camp.bloodGroups?.join(', ') }}</p>
+	  <button (click)="deleteCamp(i)">Delete</button>
 	</div>
   
 	<div class="appointments-section">
-	  <h3>Manage Appointments</h3>
-	  <div class="appointment-card" *ngFor="let i of [1,2,3]">
-		<img src="assets/images/profile.png" alt="User" class="user-img" />
-		<span>Devin made an appointment.</span>
-		<button>Ok</button>
-	  </div>
+		<h3>Manage Appointments</h3>
+		<div class="appointment-card" *ngFor="let appointment of appointments; let i = index">
+		  <img src="assets/images/profile.png" alt="User" class="user-img" />
+		  <span>{{ appointment.name }} made an appointment.</span>
+		  <small>{{ appointment.time }}</small>
+		  <button (click)="removeAppointment(i)">Ok</button>
+		</div>
 	</div>
+	  
   </div>
   

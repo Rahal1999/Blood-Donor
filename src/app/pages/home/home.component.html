@@ -1,5 +1,5 @@
 <div class="main">
-	<h2>Welcome Devin</h2>
+	<h2>Welcome {{ userName }} </h2>
 	<div class="section">
 		<div class="option" *ngFor="let option of options" (click)="onOptionSelect(option)">
 			<mat-icon class="speaker-icon">{{ option.icon }}</mat-icon>

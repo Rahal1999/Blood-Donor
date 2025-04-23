@@ -40,23 +40,32 @@ export class LoginComponent {
 
 	login() {
 		const { username, password } = this.loginForm.value;
-		const user = this.users.find((user) => user.username === username && user.password === password);
-
+	  
+		const localUsers = JSON.parse(localStorage.getItem('users') || '[]');
+		const allUsers = [...this.users, ...localUsers];
+	  
+		const user = allUsers.find(user => user.username === username && user.password === password);
+	  
 		if (user) {
-			localStorage.setItem('userRole', user.role);
 
-			this.router.navigate(['/home']);
-			this.snackBar.open('Login successfull', '', {
-				duration: 3000,
-				verticalPosition: 'bottom',
-				horizontalPosition: 'center',
-			});
+			// Store user's information in localStorage
+	    	localStorage.setItem('loggedInUser', JSON.stringify(user)); // Store the entire user object
+
+		  localStorage.setItem('userRole', user.role);
+	  
+		  this.router.navigate(['/home']);
+		  this.snackBar.open('Login successful', '', {
+			duration: 3000,
+			verticalPosition: 'bottom',
+			horizontalPosition: 'center',
+		  });
 		} else {
-			this.snackBar.open('Invalid credentials', '', {
-				duration: 3000,
-				verticalPosition: 'bottom',
-				horizontalPosition: 'center',
-			});
+		  this.snackBar.open('Invalid credentials', '', {
+			duration: 3000,
+			verticalPosition: 'bottom',
+			horizontalPosition: 'center',
+		  });
 		}
-	}
+	  }
+	  
 }

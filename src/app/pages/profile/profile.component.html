@@ -3,22 +3,26 @@
 	<div class="main-profile">
 	  <div class="header">
 		<h2>My Profile</h2>
-		<p>Welcome, Devin!</p>
+		<p>Welcome, {{ userName }}!</p>
 		<button class="history-btn">View my history 🕒</button>
 	  </div>
   
+	  <!-- NEW BUTTON -->
+	  <button class="donation-btn" (click)="recordDonation()">Donated blood today ❤️</button>
+  
+	  <!-- PROGRESS CARD -->
 	  <div class="progress-card">
-		<p>You have 60 days for your next donation</p>
+		<p>You have {{ daysRemaining }} days for your next donation</p>
 		<div class="progress-bar">
-		  <div class="filled" style="width: 30%"></div>
+		  <div class="filled" [style.width.%]="progressPercent"></div>
 		</div>
-		<p>30%</p>
+		<p>{{ progressPercent }}%</p>
 	  </div>
   
 	  <div class="summary">
 		<h3>Summary</h3>
 		<div class="chart-placeholder">[Insert chart here]</div>
-		<p>You have done your after-care routine for 07 days well. Heres a summary of your week!</p>
+		<p>You have done your after-care routine for 07 days well. Here's a summary of your week!</p>
 	  </div>
   
 	  <div class="achievements">
@@ -28,9 +32,8 @@
 		</div>
 		<button class="view-all">View all achievements</button>
 	  </div>
-
-  	</div>
   
-
-</div>
+	</div>
+  
+  </div>
   

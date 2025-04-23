@@ -15,6 +15,8 @@ import { DonationCriteriaDialogComponent } from './donation-criteria-dialog/dona
 	styleUrl: './home.component.css',
 })
 export class HomeComponent {
+	userName: string | null = null;
+
 	constructor(private router: Router, private authService: AuthService, private dialog: MatDialog) {}
 
 	userRole: 'donor' | 'organizer' | null = null;
@@ -34,6 +36,13 @@ export class HomeComponent {
 	];
 
 	ngOnInit(): void {
+		const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+		console.log('Logged in user:', loggedInUser);
+
+		if (loggedInUser) {
+			this.userName = loggedInUser.fullName; // Assuming 'fullName' is stored in user data
+		}
+
 		this.userRole = this.authService.getUserRole();
 		this.options = this.userRole === 'donor' ? this.donorOptions : this.organizerOptions;
 	}
@@ -52,7 +61,7 @@ export class HomeComponent {
 		}
 
 		if (option?.route) {
-			console.log('Navigating to:', option.route); // ✅ Add this
+			console.log('Navigating to:', option.route); 
 			this.router.navigate([option.route]);
 		} else {
 			console.warn('Invalid option selected');

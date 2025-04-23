@@ -8,6 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { NotificationService } from '../services/notification.service';
+
+
 
 @Component({
 	selector: 'app-publish-camp-dialog',
@@ -29,13 +32,20 @@ import { MatSelectModule } from '@angular/material/select';
 export class PublishCampDialogComponent {
 	campForm: FormGroup;
 
-	constructor(private dialogRef: MatDialogRef<PublishCampDialogComponent>, private fb: FormBuilder) {
+	constructor(
+		private dialogRef: MatDialogRef<PublishCampDialogComponent>,
+		private fb: FormBuilder,
+		private notificationService : NotificationService
+	) {
 		this.campForm = this.fb.group({
 			organizerName: ['', Validators.required],
 			location: ['', Validators.required],
 			date: ['', Validators.required],
 			district: ['', Validators.required],
 			city: ['', Validators.required],
+			Time: ['', Validators.required],
+			slots: [null, [Validators.required, Validators.min(1)]],
+			bloodGroups: [[], Validators.required],
 		});
 	}
 
@@ -45,8 +55,26 @@ export class PublishCampDialogComponent {
 
 	onSubmit(): void {
 		if (this.campForm.valid) {
-			console.log('Camp Details:', this.campForm.value);
-			this.dialogRef.close(this.campForm.value);
+			const campDetails = this.campForm.value;
+	
+			// Store in localStorage
+			const existingCamps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
+			existingCamps.push(campDetails);
+			localStorage.setItem('publishedCamps', JSON.stringify(existingCamps));
+	
+			// Notify the current organizer only
+			this.notificationService.setUserType('organizer');
+			const organizerMessage = `✅ Your camp at ${campDetails.location}, ${campDetails.city} has been published successfully.`;
+			this.notificationService.addNotification(organizerMessage);
+
+			// Notify donors (they will see this next time they load)
+			this.notificationService.setUserType('donor');
+			const donorMessage = `🩸 New blood donation camp at ${campDetails.location}, ${campDetails.city} on ${campDetails.date}`;
+			this.notificationService.addNotification(donorMessage);
+
+			// Close dialog
+			this.dialogRef.close(campDetails);
 		}
-	}
-}
+	}		
+}	
+

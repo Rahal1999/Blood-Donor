@@ -1,0 +1,37 @@
+<div class="community-container">
+	<h2>Blood Donation Community</h2>
+  
+	<div class="new-post">
+	  <textarea [(ngModel)]="newPostContent" placeholder="What's on your mind!"></textarea>
+	  <button (click)="postMessage()">Post</button>
+	</div>
+  
+	<!-- Display posts -->
+	<div class="post" *ngFor="let post of posts">
+	  <div class="post-header">
+		<strong>{{ post.author }} <span class="role-tag">({{ post.role }})</span></strong>
+		<span>{{ post.timestamp | date: 'short' }}</span>
+	  </div>
+	  <div class="post-body">{{ post.content }}</div>
+  
+	  <!-- Donors can react -->
+	  <div class="post-reactions" *ngIf="currentUser.role === 'donor'">
+		<button (click)="reactToPost(post, '❤️')">❤️ {{ post.reactions?.['❤️'] || 0 }}</button>
+		<button (click)="reactToPost(post, '👍')">👍 {{ post.reactions?.['👍'] || 0 }}</button>
+	  </div>
+  
+	  <!-- All users can comment -->
+	  <div class="post-comments">
+		<div *ngFor="let comment of post.comments">
+		  <strong>{{ comment.author }} <span class="role-tag">({{ comment.role }})</span></strong>: {{ comment.content }}
+		  <span class="time">{{ comment.timestamp | date: 'shortTime' }}</span>
+		</div>
+  
+		<input [(ngModel)]="post.tempComment" placeholder="Write a comment..." />
+		<button (click)="addComment(post)">Comment</button>
+	  </div>
+	</div>
+  
+	<button class="clear-btn" (click)="clearAllPosts()">Clear All Posts</button>
+  </div>
+  

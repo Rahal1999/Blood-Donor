@@ -1,8 +1,5 @@
 <div class="notifications-container">
-    <h2>Welcome, Devin!</h2>
-
-
-
+	
     <div *ngFor="let notification of notifications" class="notification-card">
         <div class="notification-header"></div>
         <div class="notification-content">
@@ -13,4 +10,12 @@
             </div>
         </div>
     </div>
+
+	<button 
+    	*ngIf="notifications.length > 0" 
+    	class="clear-button" 
+    	(click)="clearAll()">
+	    Clear All Notifications
+  	</button>
+	
 </div>

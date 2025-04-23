@@ -44,3 +44,17 @@ h2 {
     font-size: 12px;
     color: #dcdde1;
 }
+
+.clear-button {
+	background-color: #dc3545;
+	color: white;
+	border: none;
+	padding: 8px 12px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	border-radius: 4px;
+  }
+  
+  .clear-button:hover {
+	background-color: #c82333;
+  }

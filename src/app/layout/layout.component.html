@@ -2,7 +2,7 @@
 	<div class="col sidebar-left-col">
 		<div class="profile">
 			<img src="assets/images/profile.jpg" alt="User Image" class="profile-img" />
-			<p class="username">Devin Rajapakse</p>
+			<p class="username">{{ userName }}</p>
 		</div>
 
 		<nav>
@@ -10,6 +10,7 @@
 				<li (click)="navigateTo('/home')">Dashboard</li>
 				<li (click)="navigateTo('/notifications')">Notifications</li>
 				<li (click)="navigateTo('/settings')">Settings</li>
+				<li (click)="navigateTo('/community')">Community</li>
 				<li (click)="navigateTo('/login')">Logout</li>
 			</ul>
 		</nav>
