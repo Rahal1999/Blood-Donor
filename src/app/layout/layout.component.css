@@ -57,4 +57,6 @@ nav ul li:hover {
 
 .page-content {
 	width: calc(100dvw - 200px);
+	height: calc(100dvh);
+	overflow-y: scroll;
 }

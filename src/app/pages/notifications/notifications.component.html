@@ -1,21 +1,18 @@
 <div class="notifications-container">
-	
-    <div *ngFor="let notification of notifications" class="notification-card">
-        <div class="notification-header"></div>
-        <div class="notification-content">
-            <img src="assets/images/notification.png" alt="User Image" class="notification-img" />
-            <div class="notification-text">
-                <p><strong>{{ notification.message }}</strong></p>
-                <span class="timestamp">{{ notification.time }}</span>
-            </div>
-        </div>
-    </div>
+	<div class="clear-container">
+		<button *ngIf="notifications.length > 0" class="clear-button" (click)="clearAll()">Clear All Notifications</button>
+	</div>
 
-	<button 
-    	*ngIf="notifications.length > 0" 
-    	class="clear-button" 
-    	(click)="clearAll()">
-	    Clear All Notifications
-  	</button>
-	
+	<div *ngFor="let notification of notifications" class="notification-card">
+		<div class="notification-header"></div>
+		<div class="notification-content">
+			<img src="assets/images/notification.png" alt="User Image" class="notification-img" />
+			<div class="notification-text">
+				<p>
+					<strong>{{ notification.message }}</strong>
+				</p>
+				<span class="timestamp">{{ notification.time }}</span>
+			</div>
+		</div>
+	</div>
 </div>

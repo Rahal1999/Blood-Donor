@@ -1,21 +1,32 @@
 .published-camp-container {
 	padding: 20px;
 	font-family: Arial, sans-serif;
-  }
-  
-  .camp-card {
-	background-color: #2d3e90;
-	color: white;
-	padding: 20px;
+}
+
+/* Grid Layout */
+.camps-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	/* Auto-adjusting columns */
+	gap: 20px;
+	justify-content: center;
+}
+
+/* Camp Card */
+.camp-card {
+	background: linear-gradient(to bottom right, #0000003b, #fbf5f5);
+	padding: 15px;
 	border-radius: 8px;
-	margin-bottom: 20px;
-  }
-  
-  .appointments-section {
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	text-align: left;
+	transition: transform 0.2s ease-in-out;
+}
+
+.appointments-section {
 	margin-top: 30px;
-  }
-  
-  .appointment-card {
+}
+
+.appointment-card {
 	display: flex;
 	align-items: center;
 	background-color: #5267f6;
@@ -23,16 +34,16 @@
 	padding: 15px;
 	border-radius: 8px;
 	margin-bottom: 10px;
-  }
-  
-  .user-img {
+}
+
+.user-img {
 	height: 50px;
 	width: 50px;
 	border-radius: 50%;
 	margin-right: 15px;
-  }
-  
-  button {
+}
+
+button {
 	margin-left: auto;
 	background-color: white;
 	color: #5267f6;
@@ -40,5 +51,4 @@
 	border-radius: 4px;
 	padding: 6px 12px;
 	cursor: pointer;
-  }
-  
+}

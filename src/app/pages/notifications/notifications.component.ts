@@ -3,37 +3,49 @@ import { NotificationService } from '../available-camps/services/notification.se
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-notifications',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './notifications.component.html',
-  styleUrl: './notifications.component.css'
+	selector: 'app-notifications',
+	standalone: true,
+	imports: [CommonModule],
+	templateUrl: './notifications.component.html',
+	styleUrl: './notifications.component.css',
 })
 export class NotificationsComponent implements OnInit {
-  notifications: { message: string; time: string }[] = [];
-  userName: string = ''; // Store the user's name
+	userName: string = ''; // Store the user's name
 
-  constructor(private notificationService: NotificationService) {}
+	constructor(private notificationService: NotificationService) {}
 
-  ngOnInit() {
-    // Retrieve the user's name from localStorage
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      this.userName = parsedUser.fullName || parsedUser.username || 'User'; // Use 'User' if no name is found
-    }
+	notifications: any[] = [];
 
-    // Retrieve user role and set notification service's user type
-    const role = localStorage.getItem('userRole'); // 'donor' or 'organizer'
-    this.notificationService.setUserType(role === 'organizer' ? 'organizer' : 'donor');
-  
-    // Subscribe to notifications
-    this.notificationService.notifications$.subscribe((data) => {
-      this.notifications = data;
-    });
-  }
-  
-  clearAll() {
-    this.notificationService.clearNotifications();
-  }
+	ngOnInit() {
+		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+		const storedNotifications = localStorage.getItem('notifications');
+
+		if (storedNotifications) {
+			const allNotifications = JSON.parse(storedNotifications);
+
+			// Filter the notification list based on the logged in user
+			this.notifications = allNotifications.filter((notification: any) => notification.user === loggedUser.fullName);
+		} else {
+			this.notifications = []; // always make sure it's at least an array
+		}
+	}
+
+	clearAll() {
+		const storedNotifications = localStorage.getItem('notifications');
+		const storedUser = localStorage.getItem('loggedInUser');
+
+		if (storedNotifications && storedUser) {
+			const allNotifications = JSON.parse(storedNotifications);
+			const loggedUser = JSON.parse(storedUser);
+
+			// Keep notifications where user !== logged-in user
+			const updatedNotifications = allNotifications.filter((notification: any) => notification.user !== loggedUser.fullName);
+
+			// Save updated notifications back to localStorage
+			localStorage.setItem('notifications', JSON.stringify(updatedNotifications));
+
+			// Clear local notifications list (because we are showing only this user's notifications)
+			this.notifications = [];
+		}
+	}
 }

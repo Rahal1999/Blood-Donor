@@ -8,13 +8,12 @@ import { LoginComponent } from './pages/login/login.component';
 import { OrganizerSignupComponent } from './pages/organizer-signup/organizer-signup.component';
 
 export const routes: Routes = [
-
 	{
 		path: '',
 		loadComponent: () => import('./layout/layout.component').then((c) => c.LayoutComponent),
 		loadChildren: () => import('./pages/dashboard.routes').then((r) => r.dashboardRoutes),
 	},
-    {
+	{
 		path: 'sign-up',
 		loadComponent: () => import('./pages/sign-up/sign-up.component').then((c) => c.SignUpComponent),
 	},
@@ -22,33 +21,9 @@ export const routes: Routes = [
 	{ path: '', component: LoginComponent },
 	{ path: 'donor-signup', component: DonorSignupComponent },
 
-	 {
+	{
 		path: 'login',
 		loadComponent: () => import('./pages/login/login.component').then((c) => c.LoginComponent),
 	},
 	{ path: 'organizer-signup', component: OrganizerSignupComponent },
-	{
-		path: 'settings',
-		component: SettingsComponent
-	},
-	{
-		path: 'published-camps',
-		loadComponent: () => import('./pages/published-camps/published-camps.component').then(m => m.PublishedCampsComponent)
-	},
-
-	{
-		path: 'published-camps',
-		component: PublishedCampsComponent,
-	},
-
-	{
-		path: 'profile',
-		component: ProfileComponent,
-	},
-	
-	{
-		path: 'community',
-		component: CommunityComponent
-	}
-	  
 ];

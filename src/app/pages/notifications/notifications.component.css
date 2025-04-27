@@ -1,48 +1,49 @@
 .notifications-container {
-    padding: 20px;
-    background-color: #f4f4f4;
+	padding: 20px;
+	background-color: #f4f4f4;
+	height: 93dvh;
 }
 
 h2 {
-    font-size: 22px;
-    margin-bottom: 20px;
+	font-size: 22px;
+	margin-bottom: 20px;
 }
 
 .notification-card {
-    background-color: #3b3b98;
-    color: white;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    overflow: hidden;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	background-color: #3b3b98;
+	color: white;
+	border-radius: 12px;
+	margin-bottom: 15px;
+	overflow: hidden;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .notification-header {
-    height: 8px;
-    background-color: #a29bfe;
+	height: 8px;
+	background-color: #a29bfe;
 }
 
 .notification-content {
-    display: flex;
-    align-items: center;
-    padding: 15px;
+	display: flex;
+	align-items: center;
+	padding: 15px;
 }
 
 .notification-img {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    margin-right: 15px;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	margin-right: 15px;
 }
 
 .notification-text p {
-    margin: 0;
-    font-size: 16px;
+	margin: 0;
+	font-size: 16px;
 }
 
 .timestamp {
-    font-size: 12px;
-    color: #dcdde1;
+	font-size: 12px;
+	color: #dcdde1;
 }
 
 .clear-button {
@@ -53,8 +54,13 @@ h2 {
 	margin-bottom: 10px;
 	cursor: pointer;
 	border-radius: 4px;
-  }
-  
-  .clear-button:hover {
+}
+
+.clear-button:hover {
 	background-color: #c82333;
-  }
+}
+
+.clear-container {
+	display: flex;
+	justify-content: end;
+}

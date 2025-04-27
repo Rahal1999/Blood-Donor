@@ -1,27 +1,57 @@
 <h2 class="title">Donation Criteria</h2>
-<form>
-  <input #ageInput placeholder="Age" type="number" />
- 
-  <input #weightInput placeholder="Weight" type="number" />
-  
-  <p>Date of Last Donation</p>
-  <input #donationDateInput type="date" placeholder="Date of Last Donation" />
- 
-  <input #nicInput placeholder="NIC Number" type="text" />
 
-  <select #tattooInput>
-    <option disabled selected value="">Have you had a tattoo/piercing within 06 months</option>
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
-  </select>
+<form [formGroup]="donationForm" (ngSubmit)="onSubmit()">
+	<div class="section-div">
+		<mat-form-field appearance="outline">
+			<mat-label>Age</mat-label>
+			<input matInput formControlName="age" type="number" placeholder="Enter your age" />
+			<mat-error *ngIf="donationForm.get('age')?.hasError('required')">Age is required</mat-error>
+			<mat-error *ngIf="donationForm.get('age')?.hasError('min')">Must be at least 18 years old</mat-error>
+		</mat-form-field>
 
-  <select #pregnantInput>
-    <option disabled selected value="">Are you Pregnant/Breastfeeding?</option>
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
-  </select>
+		<mat-form-field appearance="outline">
+			<mat-label>Weight</mat-label>
+			<input matInput formControlName="weight" type="number" placeholder="Enter your weight" />
+			<mat-error *ngIf="donationForm.get('weight')?.hasError('required')">Weight is required</mat-error>
+			<mat-error *ngIf="donationForm.get('weight')?.hasError('min')">Must weigh at least 50kg</mat-error>
+		</mat-form-field>
+	</div>
 
-  <button (click)="onSubmit(ageInput.value, weightInput.value, tattooInput.value, pregnantInput.value, donationDateInput.value)">Submit</button>
+	<div class="section-div">
+		<mat-form-field appearance="outline">
+			<mat-label>Date of Last Donation</mat-label>
+			<input matInput formControlName="lastDonationDate" type="date" placeholder="Date of Last Donation" />
+		</mat-form-field>
 
-  <button type="button" (click)="onClose()">Back</button>
+		<mat-form-field appearance="outline">
+			<mat-label>NIC Number</mat-label>
+			<input matInput formControlName="nic" type="text" placeholder="Enter NIC Number" />
+			<mat-error *ngIf="donationForm.get('nic')?.hasError('required')">NIC is required</mat-error>
+		</mat-form-field>
+	</div>
+
+	<div class="section-div">
+		<mat-form-field appearance="outline">
+			<mat-label>Have you had a tattoo/piercing within 06 months?</mat-label>
+			<mat-select formControlName="tattoo">
+				<mat-option value="yes">Yes</mat-option>
+				<mat-option value="no">No</mat-option>
+			</mat-select>
+			<mat-error *ngIf="donationForm.get('tattoo')?.hasError('required')">Please select an option</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Are you Pregnant/Breastfeeding?</mat-label>
+			<mat-select formControlName="pregnant">
+				<mat-option value="yes">Yes</mat-option>
+				<mat-option value="no">No</mat-option>
+			</mat-select>
+			<mat-error *ngIf="donationForm.get('pregnant')?.hasError('required')">Please select an option</mat-error>
+		</mat-form-field>
+	</div>
+
+	<div class="button-group">
+		<button mat-flat-button color="warn" type="button" (click)="onClose()">Close</button>
+		<button mat-flat-button color="primary" type="submit">Submit</button>
+	</div>
 </form>

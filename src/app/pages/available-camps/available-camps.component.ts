@@ -30,8 +30,9 @@ export class AvailableCampsComponent implements OnInit {
 		}));
 	}
 
-	onMakeAppointment(index: number): void {
+	onMakeAppointment(camp: any, index: number): void {
 		const dialogRef = this.dialog.open(ConfirmAppointmentDialogComponent, {
+			data: { camp },
 			width: '400px',
 			disableClose: true,
 		});

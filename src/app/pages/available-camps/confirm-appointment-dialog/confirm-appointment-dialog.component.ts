@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogContent, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogContent, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NotificationService } from '../services/notification.service';
 
 @Component({
@@ -12,32 +12,31 @@ import { NotificationService } from '../services/notification.service';
 export class ConfirmAppointmentDialogComponent {
 	constructor(
 		private dialogRef: MatDialogRef<ConfirmAppointmentDialogComponent>,
-		private notificationService: NotificationService
+		private notificationService: NotificationService,
+		@Inject(MAT_DIALOG_DATA) public data: any
 	) {}
 
 	onConfirm(): void {
-		const userRole = localStorage.getItem('userRole');
-	const donorName = localStorage.getItem('userName') || 'A donor';
+		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}'); // your logged-in user object
+		const camp = this.data?.camp;
 
-	if (userRole === 'donor') {
-		// Temporarily switch context to organizer to send the notification to their store
-		this.notificationService.setUserType('organizer');
-		this.notificationService.addNotification(`${donorName} has made an appointment for a blood donation camp.`);
+		if (camp && loggedUser?.fullName) {
+			const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
 
-		// Store appointment info in localStorage for organizer
-		const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
-		appointments.push({ name: donorName, time: new Date().toLocaleString() });
-		localStorage.setItem('appointments', JSON.stringify(appointments));
+			const now = new Date();
+			const newNotification = {
+				message: `${camp.location} has been booked`,
+				time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+				date: now.toISOString().split('T')[0],
+				user: loggedUser.fullName,
+			};
 
-		// Notify donor of successful booking
-		this.notificationService.setUserType('donor');
-		this.notificationService.addNotification('Your appointment has been booked successfully.');
+			// to add the new item on the top of the list
+			notifications.unshift(newNotification);
+			localStorage.setItem('notifications', JSON.stringify(notifications));
+		}
 
-		// Optional: switch back to donor (if donor's notification state matters)
-		this.notificationService.setUserType('donor');
-	}
-
-	this.dialogRef.close(true);
+		this.dialogRef.close(true);
 	}
 
 	onCancel(): void {

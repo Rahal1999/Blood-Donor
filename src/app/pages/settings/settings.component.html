@@ -1,61 +1,73 @@
 <!-- settings.component.html -->
 <div class="settings-page">
-	<h2>Settings</h2>
-  
+	<div class="header">
+		<h2>Settings</h2>
+
+		<button class="back-button" (click)="goBackToHome()">← Back to Home</button>
+	</div>
+
 	<div class="profile-section">
-	  <div class="profile-picture">
-	  </div>
-	  <div class="profile-info">
-		<h3>{{userName}}</h3>
-		<p>{{userRole}}</p>
-	  </div>
-	  <div class="blood-type">
-		<span>Blood Group: {{bloodGroup}}</span>
-	  </div>
+		<div class="profile-picture"></div>
+		<div class="profile-info">
+			<h3>{{ currentUser?.fullName }}</h3>
+			<p>{{ currentUser?.role === 'donor' ? 'Blood Donor' : 'Camp Organizer' }}</p>
+		</div>
+		<div class="blood-type">
+			<span>Blood Group: {{ currentUser.bloodGroup || 'Unknown' }}</span>
+		</div>
 	</div>
-  
+
 	<hr />
-  
-	<div class="edit-profile">
-	  <h3>Edit Profile <span class="arrow">▼</span></h3>
-	  <div class="edit-fields">
-		<div class="field">
-		  <label>Name</label>
-		  <input type="text" placeholder= {{userName}} />
+
+	<form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+		<div class="edit-profile">
+			<h3>Edit Profile</h3>
+			<div class="edit-fields">
+				<mat-form-field appearance="outline" class="full-width">
+					<mat-label>Name</mat-label>
+					<input matInput formControlName="fullName" placeholder="Name" />
+				</mat-form-field>
+
+				<mat-form-field appearance="outline" class="full-width">
+					<mat-label>NIC</mat-label>
+					<input matInput formControlName="nic" placeholder="1123445689" />
+				</mat-form-field>
+
+				<mat-form-field appearance="outline" class="full-width">
+					<mat-label>Address</mat-label>
+					<input matInput formControlName="address" placeholder="Address" />
+				</mat-form-field>
+
+				<mat-form-field appearance="outline" class="full-width">
+					<mat-label>Date of Birth</mat-label>
+					<input matInput type="date" formControlName="dob" />
+				</mat-form-field>
+			</div>
 		</div>
-		<div class="field">
-		  <label>Contact Number</label>
-		  <input type="text" placeholder="07XXXXXXXX" />
+
+		<div class="change-password">
+			<h3>Change Password</h3>
+
+			<mat-form-field appearance="outline" class="full-width">
+				<mat-label>Old Password</mat-label>
+				<input matInput type="password" formControlName="password" />
+			</mat-form-field>
+
+			<div style="margin-top: 20px">
+				<mat-form-field appearance="outline">
+					<mat-label>New Password</mat-label>
+					<input matInput type="password" formControlName="newPassword" />
+				</mat-form-field>
+
+				<mat-form-field appearance="outline" style="margin-left: 20px">
+					<mat-label>Confirm Password</mat-label>
+					<input matInput type="password" formControlName="confirmPassword" />
+				</mat-form-field>
+			</div>
 		</div>
-		<div class="field">
-		  <label>Address</label>
-		  <input type="text" placeholder="Address" />
+
+		<div class="action-btn">
+			<button mat-flat-button class="seeyou-btn primary medium" type="submit" [disabled]="editProfileForm.invalid">Update</button>
 		</div>
-		<div class="field">
-		  <label>Date of Birth</label>
-		  <input type="date" />
-		</div>
-	</div>
+	</form>
 </div>
-  
-	<div class="change-password">
-		<h3>Change Password <span class="arrow">▼</span></h3>
-		  <div class="field">
-			  <label>Old Password</label>
-			  <input type="password" />
-		  </div>
-		  <div class="field">
-			  <label>New Password</label>
-			  <input type="password" />
-		  </div>
-		  <div class="field">
-			  <label>Confirm Password</label>
-			  <input type="password" />
-		  </div>
-	  </div>
-	  
-
-	<button class="back-button" (click)="goBackToHome()">← Back to Home</button>
-
-  </div>
-  

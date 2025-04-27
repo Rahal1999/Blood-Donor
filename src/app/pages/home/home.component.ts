@@ -61,27 +61,24 @@ export class HomeComponent {
 		}
 
 		if (option?.route) {
-			console.log('Navigating to:', option.route); 
+			console.log('Navigating to:', option.route);
 			this.router.navigate([option.route]);
 		} else {
 			console.warn('Invalid option selected');
 		}
 	}
-	
+
 	openDonationCriteriaDialog() {
 		this.dialog.open(DonationCriteriaDialogComponent, {
 			width: '600px',
+			height: '500px',
 		});
-	
-
 	}
 
 	openPublishDialog() {
 		const dialogRef = this.dialog.open(PublishCampDialogComponent, {
 			width: '400px',
 		});
-
-
 
 		dialogRef.afterClosed().subscribe((result) => {
 			if (result) {
