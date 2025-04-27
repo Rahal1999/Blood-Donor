@@ -78,6 +78,7 @@ export class HomeComponent {
 	openPublishDialog() {
 		const dialogRef = this.dialog.open(PublishCampDialogComponent, {
 			width: '400px',
+			height: '500px',
 		});
 
 		dialogRef.afterClosed().subscribe((result) => {
