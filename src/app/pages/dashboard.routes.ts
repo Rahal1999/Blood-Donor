@@ -34,5 +34,4 @@ export const dashboardRoutes: Routes = [
 		path: 'published-camps',
 		loadComponent: () => import('./published-camps/published-camps.component').then((c) => c.PublishedCampsComponent),
 	},
-	// test
 ];

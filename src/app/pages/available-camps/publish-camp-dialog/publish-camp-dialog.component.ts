@@ -10,8 +10,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { NotificationService } from '../services/notification.service';
 
-
-
 @Component({
 	selector: 'app-publish-camp-dialog',
 	standalone: true,
@@ -32,11 +30,7 @@ import { NotificationService } from '../services/notification.service';
 export class PublishCampDialogComponent {
 	campForm: FormGroup;
 
-	constructor(
-		private dialogRef: MatDialogRef<PublishCampDialogComponent>,
-		private fb: FormBuilder,
-		private notificationService : NotificationService
-	) {
+	constructor(private dialogRef: MatDialogRef<PublishCampDialogComponent>, private fb: FormBuilder, private notificationService: NotificationService) {
 		this.campForm = this.fb.group({
 			organizerName: ['', Validators.required],
 			location: ['', Validators.required],
@@ -54,14 +48,17 @@ export class PublishCampDialogComponent {
 	}
 
 	onSubmit(): void {
+		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+
 		if (this.campForm.valid) {
 			const campDetails = this.campForm.value;
-	
+			campDetails.user = loggedUser.fullName;
+
 			// Store in localStorage
 			const existingCamps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
 			existingCamps.push(campDetails);
 			localStorage.setItem('publishedCamps', JSON.stringify(existingCamps));
-	
+
 			// Notify the current organizer only
 			this.notificationService.setUserType('organizer');
 			const organizerMessage = `✅ Your camp at ${campDetails.location}, ${campDetails.city} has been published successfully.`;
@@ -75,6 +72,5 @@ export class PublishCampDialogComponent {
 			// Close dialog
 			this.dialogRef.close(campDetails);
 		}
-	}		
-}	
-
+	}
+}

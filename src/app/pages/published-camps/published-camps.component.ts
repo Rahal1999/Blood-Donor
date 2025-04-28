@@ -15,16 +15,15 @@ export class PublishedCampsComponent implements OnInit {
 	appointments: { name: string; time: string }[] = [];
 
 	ngOnInit() {
-		const storedCamps = localStorage.getItem('publishedCamps');
-		this.camps = storedCamps ? JSON.parse(storedCamps) : [];
+		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+		const storedCamps = localStorage.getItem('publishedCamps') || '{}';
+		const allNotifications = JSON.parse(storedCamps);
+
+		// Filter the notification list based on the logged in user
+		this.camps = allNotifications.filter((camp: any) => camp.user === loggedUser.fullName);
 
 		const storedAppointments = localStorage.getItem('appointments');
 		this.appointments = storedAppointments ? JSON.parse(storedAppointments) : [];
-	}
-
-	loadCamps() {
-		const storedCamps = localStorage.getItem('publishedCamps');
-		this.camps = storedCamps ? JSON.parse(storedCamps) : [];
 	}
 
 	deleteCamp(index: number) {

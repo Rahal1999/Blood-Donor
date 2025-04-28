@@ -17,17 +17,7 @@ export class AvailableCampsComponent implements OnInit {
 	constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
 	ngOnInit(): void {
-		const storedCamps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
-
-		// Optionally enhance or normalize the data here
-		this.camps = storedCamps.map((camp: any) => ({
-			title: 'Camp Details',
-			location: camp.location,
-			date: camp.date,
-			time: camp.Time,
-			slots: camp.slots || 10,
-			bloodGroups: camp.bloodGroups?.length ? camp.bloodGroups : ['A+', 'O+'],
-		}));
+		this.camps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
 	}
 
 	onMakeAppointment(camp: any, index: number): void {

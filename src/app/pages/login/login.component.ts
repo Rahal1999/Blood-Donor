@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 	constructor(private router: Router, private snackBar: MatSnackBar) {
 		this.loginForm = new FormGroup({
-			username: new FormControl('', Validators.required),
+			username: new FormControl('', [Validators.required, Validators.email]),
 			password: new FormControl('', Validators.required),
 		});
 	}
@@ -28,8 +28,24 @@ export class LoginComponent {
 	];
 
 	camps: any[] = [
-		{ title: 'Camp Details', location: 'IIT', date: '04th February 2024', time: '10:30 AM onwards', slots: 10, bloodGroups: ['A+', 'B+', 'O-'] },
-		{ title: 'Camp Details', location: 'City Hospital', date: '10th February 2024', time: '11:00 AM onwards', slots: 5, bloodGroups: ['A-', 'O+', 'B-'] },
+		{
+			title: 'Camp Details',
+			location: 'IIT',
+			date: '04th February 2024',
+			time: '10:30 AM onwards',
+			slots: 10,
+			bloodGroups: ['A+', 'B+', 'O-'],
+			user: 'Evin',
+		},
+		{
+			title: 'Camp Details',
+			location: 'City Hospital',
+			date: '10th February 2024',
+			time: '11:00 AM onwards',
+			slots: 5,
+			bloodGroups: ['A-', 'O+', 'B-'],
+			user: 'Evin',
+		},
 		{
 			title: 'Camp Details',
 			location: 'Community Center',
@@ -37,6 +53,7 @@ export class LoginComponent {
 			time: '9:00 AM onwards',
 			slots: 12,
 			bloodGroups: ['AB+', 'O+', 'A+'],
+			user: 'Evin',
 		},
 		{
 			title: 'Camp Details',
@@ -45,13 +62,62 @@ export class LoginComponent {
 			time: '10:00 AM onwards',
 			slots: 8,
 			bloodGroups: ['B+', 'O+', 'AB-'],
+			user: 'Evin',
 		},
-		{ title: 'Camp Details', location: 'Health Hub', date: '25th February 2024', time: '1:00 PM onwards', slots: 15, bloodGroups: ['A+', 'AB+', 'O-'] },
-		{ title: 'Camp Details', location: 'Govt. Hospital', date: '28th February 2024', time: '10:00 AM onwards', slots: 6, bloodGroups: ['O+', 'A-', 'B-'] },
-		{ title: 'Camp Details', location: 'Wellness Center', date: '02nd March 2024', time: '2:00 PM onwards', slots: 10, bloodGroups: ['A+', 'B+', 'O+'] },
-		{ title: 'Camp Details', location: 'Blood Bank', date: '05th March 2024', time: '12:00 PM onwards', slots: 7, bloodGroups: ['O+', 'A+', 'AB-'] },
-		{ title: 'Camp Details', location: 'University Clinic', date: '10th March 2024', time: '9:30 AM onwards', slots: 9, bloodGroups: ['A-', 'B-', 'O-'] },
-		{ title: 'Camp Details', location: 'Mega Health Camp', date: '15th March 2024', time: '11:30 AM onwards', slots: 20, bloodGroups: ['A+', 'O+', 'AB+'] },
+		{
+			title: 'Camp Details',
+			location: 'Health Hub',
+			date: '25th February 2024',
+			time: '1:00 PM onwards',
+			slots: 15,
+			bloodGroups: ['A+', 'AB+', 'O-'],
+			user: 'Evin',
+		},
+		{
+			title: 'Camp Details',
+			location: 'Govt. Hospital',
+			date: '28th February 2024',
+			time: '10:00 AM onwards',
+			slots: 6,
+			bloodGroups: ['O+', 'A-', 'B-'],
+			user: 'Evin',
+		},
+		{
+			title: 'Camp Details',
+			location: 'Wellness Center',
+			date: '02nd March 2024',
+			time: '2:00 PM onwards',
+			slots: 10,
+			bloodGroups: ['A+', 'B+', 'O+'],
+			user: 'Evin',
+		},
+		{
+			title: 'Camp Details',
+			location: 'Blood Bank',
+			date: '05th March 2024',
+			time: '12:00 PM onwards',
+			slots: 7,
+			bloodGroups: ['O+', 'A+', 'AB-'],
+			user: 'Evin',
+		},
+		{
+			title: 'Camp Details',
+			location: 'University Clinic',
+			date: '10th March 2024',
+			time: '9:30 AM onwards',
+			slots: 9,
+			bloodGroups: ['A-', 'B-', 'O-'],
+			user: 'Evin',
+		},
+		{
+			title: 'Camp Details',
+			location: 'Mega Health Camp',
+			date: '15th March 2024',
+			time: '11:30 AM onwards',
+			slots: 20,
+			bloodGroups: ['A+', 'O+', 'AB+'],
+			user: 'Evin',
+		},
 	];
 
 	loginForm: FormGroup;
