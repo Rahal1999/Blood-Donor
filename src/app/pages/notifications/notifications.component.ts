@@ -23,7 +23,7 @@ export class NotificationsComponent implements OnInit {
 
 		if (this.userRole === 'organizer') {
 			const notifications_organizer = JSON.parse(localStorage.getItem('notifications_organizer') || '{}');
-			this.notifications = notifications_organizer;
+			this.notifications = notifications_organizer.filter((notification: any) => notification.user === loggedUser.fullName);
 		} else {
 			if (storedNotifications) {
 				const allNotifications = JSON.parse(storedNotifications);
