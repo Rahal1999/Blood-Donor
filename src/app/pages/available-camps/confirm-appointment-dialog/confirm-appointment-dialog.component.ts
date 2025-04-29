@@ -22,6 +22,7 @@ export class ConfirmAppointmentDialogComponent {
 
 		if (camp && loggedUser?.fullName) {
 			const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+			const notificationsOrganizer = JSON.parse(localStorage.getItem('notifications_organizer') || '[]');
 
 			const now = new Date();
 			const newNotification = {
@@ -31,6 +32,19 @@ export class ConfirmAppointmentDialogComponent {
 				user: loggedUser.fullName,
 			};
 
+			const newOrganizerNotification = {
+				message: `🧾 ${camp.location} has been booked by the donor - ${loggedUser.fullName}`,
+				time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+				date: now.toISOString().split('T')[0],
+				user: camp.user,
+			};
+
+			// Send notification to the camp organizer
+			// to add the new item on the top of the list
+			notificationsOrganizer.unshift(newOrganizerNotification);
+			localStorage.setItem('notifications_organizer', JSON.stringify(notificationsOrganizer));
+
+			// Send notification to the logged user
 			// to add the new item on the top of the list
 			notifications.unshift(newNotification);
 			localStorage.setItem('notifications', JSON.stringify(notifications));
