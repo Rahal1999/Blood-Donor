@@ -81,3 +81,33 @@ export class AvailableCampsComponent implements OnInit {
 	}
 	
 }
+
+
+// export class AvailableCampsComponent implements OnInit {
+// 	camps: any[] = [];
+
+// 	constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {}
+
+// 	ngOnInit(): void {
+// 		this.camps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
+// 	}
+
+// 	onMakeAppointment(camp: any, index: number): void {
+// 		const dialogRef = this.dialog.open(ConfirmAppointmentDialogComponent, {
+// 			data: { camp },
+// 			width: '400px',
+// 			disableClose: true,
+// 		});
+
+// 		dialogRef.afterClosed().subscribe((confirmed) => {
+// 			if (confirmed) {
+// 				this.camps[index].booked = true;
+// 				this.snackBar.open('Appointment Confirmed!', 'Close', {
+// 					duration: 3000,
+// 					verticalPosition: 'bottom',
+// 					horizontalPosition: 'center',
+// 				});
+// 			}
+// 		});
+// 	}
+// }
