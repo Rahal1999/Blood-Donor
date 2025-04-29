@@ -18,28 +18,59 @@ export class AvailableCampsComponent implements OnInit {
 
 	ngOnInit(): void {
 		const storedCamps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
-
-		// Optionally enhance or normalize the data here
-		this.camps = storedCamps.map((camp: any) => ({
-			title: 'Camp Details',
-			location: camp.location,
-			date: camp.date,
-			time: camp.Time,
-			slots: camp.slots || 10,
-			bloodGroups: camp.bloodGroups?.length ? camp.bloodGroups : ['A+', 'O+'],
-		}));
+		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+	
+		// Get booked camps for the logged-in user
+		const bookedCamps = JSON.parse(localStorage.getItem(`bookedCamps_${loggedUser.fullName}`) || '[]');
+	
+		this.camps = storedCamps.map((camp: any) => {
+			const isBooked = bookedCamps.some((bookedCamp: any) => 
+				bookedCamp.location === camp.location && 
+				bookedCamp.date === camp.date && 
+				bookedCamp.time === camp.Time // <-- Correct here
+			);
+			return {
+				title: 'Camp Details',
+				location: camp.location,
+				date: camp.date,
+				time: camp.Time,
+				slots: camp.slots || 10,
+				bloodGroups: camp.bloodGroups?.length ? camp.bloodGroups : ['A+', 'O+'],
+				booked: isBooked,
+			};
+		});
+		
 	}
+	
 
 	onMakeAppointment(camp: any, index: number): void {
+		if (camp.booked) {
+			this.snackBar.open('You have already booked this camp.', 'Close', {
+				duration: 3000,
+				verticalPosition: 'bottom',
+				horizontalPosition: 'center',
+			});
+			return;
+		}
+	
 		const dialogRef = this.dialog.open(ConfirmAppointmentDialogComponent, {
 			data: { camp },
 			width: '400px',
 			disableClose: true,
 		});
-
+	
 		dialogRef.afterClosed().subscribe((confirmed) => {
 			if (confirmed) {
 				this.camps[index].booked = true;
+	
+				const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+				const bookedCampsKey = `bookedCamps_${loggedUser.fullName}`;
+	
+				// Save to localStorage
+				const existingBooked = JSON.parse(localStorage.getItem(bookedCampsKey) || '[]');
+				existingBooked.push(camp);
+				localStorage.setItem(bookedCampsKey, JSON.stringify(existingBooked));
+	
 				this.snackBar.open('Appointment Confirmed!', 'Close', {
 					duration: 3000,
 					verticalPosition: 'bottom',
@@ -48,4 +79,5 @@ export class AvailableCampsComponent implements OnInit {
 			}
 		});
 	}
+	
 }

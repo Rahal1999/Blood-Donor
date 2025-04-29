@@ -27,8 +27,13 @@
 					<span *ngIf="!last">,</span>
 				</span>
 			</p>
-			<button *ngIf="!camp.booked" (click)="onMakeAppointment(camp, i)">Make Appointment</button>
-			<span *ngIf="camp.booked" class="booked-label">Booked!</span>
+
+			<button 
+				(click)="onMakeAppointment(camp, i)" 
+				[disabled]="camp.booked">
+				{{ camp.booked ? 'Booked' : 'Book Appointment' }}
+			</button>
+
 		</div>
 	</div>
 </div>

@@ -77,7 +77,7 @@ export class LoginComponent {
 			localStorage.setItem('loggedInUser', JSON.stringify(user)); // Store the entire user object
 
 			localStorage.setItem('userRole', user.role);
-			localStorage.setItem('publishedCamps', JSON.stringify(this.camps));
+			//localStorage.setItem('publishedCamps', JSON.stringify(this.camps));
 
 			this.router.navigate(['/home']);
 			this.snackBar.open('Login successful', '', {

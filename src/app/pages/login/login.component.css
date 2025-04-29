@@ -1,37 +1,78 @@
-.login-container {
+ /* Top Centered and Attractive Heading */
+  .hero-heading {
 	text-align: center;
-	width: 300px;
-	margin: auto;
-	padding: 20px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	border-radius: 8px;
-}
-
-mat-form-field {
-	width: 100%;
-	margin-bottom: 10px;
-}
-
-.signup-links {
-	margin-top: 10px;
-}
-
-.main {
+	padding: 50px 20px 30px;
+	background: linear-gradient(135deg, #e53935, #d32f2f);
+	color: white;
+	border-bottom: 5px solid #b71c1c;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+	position: relative;
+	z-index: 1;
+  }
+  
+  .hero-heading h1 {
+	font-size: 3rem;
+	margin: 0 0 10px;
+	font-weight: 700;
+	animation: fadeInDown 1s ease-out;
+  }
+  
+  .hero-heading p {
+	font-size: 1.2rem;
+	margin: 0 auto;
+	max-width: 600px;
+	font-weight: 300;
+	animation: fadeInUp 1s ease-out;
+  }
+  
+  /* Centered Login Box */
+  .main {
 	display: flex;
-	align-items: center;
 	justify-content: center;
-	height: 100%;
+	align-items: start;
+	margin-top: 50px;
+	padding: 20px;
+  }
+  
+  .login-container {
+	background: #c0bfbf;
+	text-align: center;
+	width: 320px;
+	padding: 25px 20px;
+	border-radius: 12px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+	animation: fadeIn 1s ease-out;
+  }
+  
+  mat-form-field {
 	width: 100%;
-}
-
-.signup-links {
+	margin-bottom: 12px;
+  }
+  
+  .signup-links {
 	display: flex;
 	justify-content: center;
 	gap: 12px;
-	margin-top: 16px;
+	margin-top: 20px;
   }
   
   .signup-links button {
 	min-width: 120px;
+  }
+  
+  /* Subtle animations */
+  @keyframes fadeInDown {
+	from { opacity: 0; transform: translateY(-20px); }
+	to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes fadeInUp {
+	from { opacity: 0; transform: translateY(20px); }
+	to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes fadeIn {
+	from { opacity: 0; }
+	to   { opacity: 1; }
   }
   

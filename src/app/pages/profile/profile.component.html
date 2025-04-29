@@ -1,5 +1,4 @@
 <div class="profile-container">
-
 	<div class="main-profile">
 	  <div class="header">
 		<h2>My Profile</h2>
@@ -7,33 +6,34 @@
 		<button class="history-btn">View my history 🕒</button>
 	  </div>
   
-	  <!-- NEW BUTTON -->
-	  <button class="donation-btn" (click)="recordDonation()">Donated blood today ❤️</button>
-  
-	  <!-- PROGRESS CARD -->
-	  <div class="progress-card">
-		<p>You have {{ daysRemaining }} days for your next donation</p>
-		<div class="progress-bar">
-		  <div class="filled" [style.width.%]="progressPercent"></div>
+	  <!-- Donor View: Donation Progress -->
+	  <div *ngIf="userRole === 'donor'">
+		<button class="donation-btn" (click)="recordDonation()">Donated blood today ❤️</button>
+		<div class="progress-card">
+		  <p>You have {{ daysRemaining }} days for your next donation</p>
+		  <div class="progress-bar">
+			<div class="filled" [style.width.%]="progressPercent"></div>
+		  </div>
+		  <p>{{ progressPercent }}%</p>
 		</div>
-		<p>{{ progressPercent }}%</p>
 	  </div>
   
-	  <div class="summary">
-		<h3>Summary</h3>
-		<div class="chart-placeholder">[Insert chart here]</div>
-		<p>You have done your after-care routine for 07 days well. Here's a summary of your week!</p>
-	  </div>
-  
-	  <div class="achievements">
-		<h3>Achievements</h3>
-		<div class="icons">
-		  <div class="achievement-icon" *ngFor="let i of [1,2,3,4,5,6,7,8]">🏆</div>
+	  <!-- Organizer View: Camp Details -->
+	  <div *ngIf="userRole === 'organizer'">
+		<h3>My Published Camps</h3>
+		<div *ngFor="let camp of publishedCamps" class="camp-card">
+		  <h4>{{ camp.location }}, {{ camp.city }}</h4>
+		  <p>Date: {{ camp.date }}</p>
+		  <p>Days remaining: {{ camp.remainingDays }}</p>
+		  <div class="progress-bar">
+			<div 
+			  class="filled"
+			  [style.width.%]="((60 - camp.remainingDays) / 60) * 100"
+			  *ngIf="camp.remainingDays > 0"
+			></div>
+		  </div>
 		</div>
-		<button class="view-all">View all achievements</button>
 	  </div>
-  
 	</div>
-  
   </div>
   
