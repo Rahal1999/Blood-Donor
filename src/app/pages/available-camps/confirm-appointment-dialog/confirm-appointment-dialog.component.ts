@@ -26,7 +26,7 @@ export class ConfirmAppointmentDialogComponent {
 
 			const now = new Date();
 			const newNotification = {
-				message: `${camp.location} has been booked`,
+				message: `Donation camp at ${camp.location} has been booked`,
 				time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
 				date: now.toISOString().split('T')[0],
 				user: loggedUser.fullName,
