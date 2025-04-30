@@ -28,12 +28,9 @@
 				</span>
 			</p>
 
-			<button 
-				(click)="onMakeAppointment(camp, i)" 
-				[disabled]="camp.booked">
+			<button (click)="onMakeAppointment(camp, i)" [disabled]="camp.booked">
 				{{ camp.booked ? 'Booked' : 'Book Appointment' }}
 			</button>
-
 		</div>
 	</div>
 </div>

@@ -19,29 +19,20 @@ export class AvailableCampsComponent implements OnInit {
 	ngOnInit(): void {
 		const storedCamps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
 		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-	
+
 		// Get booked camps for the logged-in user
-		const bookedCamps = JSON.parse(localStorage.getItem(`bookedCamps_${loggedUser.fullName}`) || '[]');
-	
+		const bookedCamps = JSON.parse(localStorage.getItem(`bookedCamps`) || '[]');
+
 		this.camps = storedCamps.map((camp: any) => {
-			const isBooked = bookedCamps.some((bookedCamp: any) => 
-				bookedCamp.location === camp.location && 
-				bookedCamp.date === camp.date && 
-				bookedCamp.time === camp.Time // <-- Correct here
+			const isBooked = bookedCamps.some(
+				(bookedCamp: any) => bookedCamp.location === camp.location && bookedCamp.date === camp.date && bookedCamp.bookedBy === loggedUser.fullName // <-- Correct here
 			);
 			return {
-				title: 'Camp Details',
-				location: camp.location,
-				date: camp.date,
-				time: camp.Time,
-				slots: camp.slots || 10,
-				bloodGroups: camp.bloodGroups?.length ? camp.bloodGroups : ['A+', 'O+'],
+				...camp,
 				booked: isBooked,
 			};
 		});
-		
 	}
-	
 
 	onMakeAppointment(camp: any, index: number): void {
 		if (camp.booked) {
@@ -52,25 +43,31 @@ export class AvailableCampsComponent implements OnInit {
 			});
 			return;
 		}
-	
+
 		const dialogRef = this.dialog.open(ConfirmAppointmentDialogComponent, {
 			data: { camp },
 			width: '400px',
 			disableClose: true,
 		});
-	
+
 		dialogRef.afterClosed().subscribe((confirmed) => {
 			if (confirmed) {
 				this.camps[index].booked = true;
-	
+
 				const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-				const bookedCampsKey = `bookedCamps_${loggedUser.fullName}`;
-	
-				// Save to localStorage
-				const existingBooked = JSON.parse(localStorage.getItem(bookedCampsKey) || '[]');
-				existingBooked.push(camp);
-				localStorage.setItem(bookedCampsKey, JSON.stringify(existingBooked));
-	
+				// const bookedCampsKey = `bookedCamps_${loggedUser.fullName}`;
+
+				// // Save to localStorage
+				// const existingBooked = JSON.parse(localStorage.getItem(bookedCampsKey) || '[]');
+				// existingBooked.push(camp);
+				// localStorage.setItem(bookedCampsKey, JSON.stringify(existingBooked));
+
+				// Add `bookedBy` property and save to a separate list
+				const campWithBookedBy = { ...camp, bookedBy: loggedUser.fullName };
+				const existingCampsWithBookedBy = JSON.parse(localStorage.getItem('bookedCamps') || '[]');
+				existingCampsWithBookedBy.push(campWithBookedBy);
+				localStorage.setItem('bookedCamps', JSON.stringify(existingCampsWithBookedBy));
+
 				this.snackBar.open('Appointment Confirmed!', 'Close', {
 					duration: 3000,
 					verticalPosition: 'bottom',
@@ -79,9 +76,7 @@ export class AvailableCampsComponent implements OnInit {
 			}
 		});
 	}
-	
 }
-
 
 // export class AvailableCampsComponent implements OnInit {
 // 	camps: any[] = [];
