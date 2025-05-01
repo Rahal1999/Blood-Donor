@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../available-camps/services/notification.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DonationHistoryDialogComponent } from '../profile/donation-history-dialog/donation-history-dialog.component'; 
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +19,10 @@ export class ProfileComponent implements OnInit {
   progressPercent: number = 0;
   publishedCamps: any[] = [];  // To store camps for organizers
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(
+	private notificationService: NotificationService,
+	private dialog: MatDialog
+) {}
 
   ngOnInit(): void {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
@@ -38,15 +43,29 @@ export class ProfileComponent implements OnInit {
   }
 
   recordDonation() {
-    const today = new Date();
-    localStorage.setItem('lastDonationDate', today.toISOString());
-    this.lastDonationDate = today;
-    this.updateProgress();
-
-    this.notificationService.addNotification(
-      `Thank you${this.userName ? ', ' + this.userName : ''}, for your donation! You have 60 days left until your next donation.`
-    );
+	const today = new Date();
+	const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+	const donationHistoryKey = `donationHistory_${loggedInUser.email}`;
+  
+	// Get existing history or initialize empty array
+	const history: string[] = JSON.parse(localStorage.getItem(donationHistoryKey) || '[]');
+  
+	// Add today's date to the history
+	history.push(today.toISOString());
+  
+	// Save updated history
+	localStorage.setItem(donationHistoryKey, JSON.stringify(history));
+  
+	// Also update last donation date as before
+	localStorage.setItem('lastDonationDate', today.toISOString());
+	this.lastDonationDate = today;
+	this.updateProgress();
+  
+	this.notificationService.addNotification(
+	  `Thank you${this.userName ? ', ' + this.userName : ''}, for your donation! You have 60 days left until your next donation.`
+	);
   }
+  
 
   updateProgress() {
     if (!this.lastDonationDate) return;
@@ -77,6 +96,20 @@ export class ProfileComponent implements OnInit {
 		  remainingDays: remainingDays > 0 ? remainingDays : 0,
 		};
 	  });
-  }
+    }
   
+	donationHistory: string[] = [];
+
+	viewDonationHistory() {
+		const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+		const donationHistoryKey = `donationHistory_${loggedInUser.email}`;
+		const history: string[] = JSON.parse(localStorage.getItem(donationHistoryKey) || '[]');
+	  
+		this.dialog.open(DonationHistoryDialogComponent, {
+		  data: { history: history.reverse() },
+		  width: '400px',
+		});
+    }
+	  
+
 }
