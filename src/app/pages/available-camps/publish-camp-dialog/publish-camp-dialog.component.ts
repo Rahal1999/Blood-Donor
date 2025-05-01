@@ -53,6 +53,9 @@ export class PublishCampDialogComponent {
 		if (this.campForm.valid) {
 			const campDetails = this.campForm.value;
 			campDetails.user = loggedUser.fullName;
+	
+			// ✅ Add unique ID
+			campDetails.id = 'camp_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
 
 			// Store in localStorage
 			const existingCamps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');

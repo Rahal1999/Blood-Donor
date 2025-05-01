@@ -16,15 +16,15 @@ export class PublishedCampsComponent implements OnInit {
 
 	ngOnInit() {
 		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-		const storedCamps = localStorage.getItem('publishedCamps') || '{}';
-		const allNotifications = JSON.parse(storedCamps);
-
-		// Filter the notification list based on the logged in user
-		this.camps = allNotifications.filter((camp: any) => camp.user === loggedUser.fullName);
-
-		const storedAppointments = localStorage.getItem('appointments');
-		this.appointments = storedAppointments ? JSON.parse(storedAppointments) : [];
+		const storedCamps = localStorage.getItem('publishedCamps') || '[]';
+		const allCamps = JSON.parse(storedCamps);
+	
+		this.camps = allCamps.filter((camp: any) => camp.user === loggedUser.fullName);
+	
+		const storedAppointments = JSON.parse(localStorage.getItem('appointments_organizer') || '[]');
+		this.appointments = storedAppointments.filter((appt: any) => appt.organizer === loggedUser.fullName);
 	}
+	
 
 	deleteCamp(index: number) {
 		this.camps.splice(index, 1);
@@ -33,6 +33,7 @@ export class PublishedCampsComponent implements OnInit {
 
 	removeAppointment(index: number) {
 		this.appointments.splice(index, 1);
-		localStorage.setItem('appointments', JSON.stringify(this.appointments));
+		localStorage.setItem('appointments_organizer', JSON.stringify(this.appointments));
 	}
+	
 }

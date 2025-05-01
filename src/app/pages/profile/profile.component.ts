@@ -81,6 +81,7 @@ export class ProfileComponent implements OnInit {
   loadPublishedCamps() {
 	const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
 	const camps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
+	const appointments = JSON.parse(localStorage.getItem('appointments_organizer') || '[]');
   
 	// Filter to only include camps created by the logged-in user
 	this.publishedCamps = camps
@@ -90,10 +91,14 @@ export class ProfileComponent implements OnInit {
 		const today = new Date();
 		const diffTime = campDate.getTime() - today.getTime();
 		const remainingDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+		const appointmentCount = appointments.filter((appt: any) => appt.campId === camp.id).length;
+
 		
 		return {
 		  ...camp,
 		  remainingDays: remainingDays > 0 ? remainingDays : 0,
+		  appointmentCount, 
 		};
 	  });
     }
