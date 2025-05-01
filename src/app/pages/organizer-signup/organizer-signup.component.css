@@ -2,29 +2,95 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	max-width: 500px;
+	max-width: 600px;
 	margin: 40px auto;
-	padding: 30px;
+	padding: 40px;
+	background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
 	border-radius: 12px;
-	background-color: #fff;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease-in-out;
+  }
+  
+  .signup-container:hover {
+	transform: scale(1.02);
   }
   
   .signup-container h2 {
 	text-align: center;
-	margin-bottom: 30px;
-	font-size: 20px;
+	margin-bottom: 40px;
+	font-size: 26px;
+	font-weight: 600;
+	color: #4A90E2;
+	text-transform: uppercase;
+	letter-spacing: 1px;
   }
   
   mat-form-field {
 	width: 100%;
-	margin-bottom: 15px;
+	margin-bottom: 20px;
+  }
+  
+  mat-form-field .mat-form-field-label {
+	color: #4A90E2;
+	font-weight: 500;
+	text-transform: uppercase;
+  }
+  
+  mat-form-field input,
+  mat-select {
+	border-radius: 8px;
+	padding: 12px;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	background-color: #f9f9f9;
+	transition: all 0.3s ease-in-out;
+  }
+  
+  mat-form-field input:focus,
+  mat-select:focus {
+	border-color: #4A90E2;
+	box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+	transform: scale(1.02);
+  }
+  
+  mat-input-element {
+	font-size: 16px;
   }
   
   button {
 	width: 100%;
-	padding: 10px;
-	font-size: 16px;
-	border-radius: 10px;
+	padding: 12px;
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+	background: linear-gradient(135deg, #FF6F61, #FF3B2D);
+	border-radius: 8px;
+	border: none;
+	transition: all 0.3s ease-in-out;
+  }
+  
+  button:hover {
+	transform: translateY(-2px) scale(1.05);
+	background: linear-gradient(135deg, #FF3B2D, #FF6F61);
+  }
+  
+  button[disabled] {
+	background-color: #ddd;
+	cursor: not-allowed;
+	transform: none;
+  }
+  
+  @media (max-width: 576px) {
+	.signup-container {
+	  padding: 20px;
+	}
+  
+	.signup-container h2 {
+	  font-size: 22px;
+	}
+  
+	button {
+	  font-size: 16px;
+	}
   }
   
