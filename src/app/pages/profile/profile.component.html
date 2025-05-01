@@ -16,6 +16,16 @@
 		  </div>
 		  <p>{{ progressPercent }}%</p>
 		</div>
+
+		<div *ngIf="bookedCamps.length > 0">
+			<h3>Your Booked Camps</h3>
+			<div *ngFor="let camp of bookedCamps" class="camp-card">
+			  <p><strong>Location:</strong> {{ camp.location }}</p>
+			  <p><strong>Date:</strong> {{ camp.date }}</p>
+			  <p><strong>Days Remaining:</strong> {{ camp.remainingDays }}</p>
+			</div>
+		</div>
+		  
 	  </div>
   
 	  <!-- Organizer View: Camp Details -->

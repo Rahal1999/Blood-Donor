@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit {
   daysRemaining: number = 60;
   progressPercent: number = 0;
   publishedCamps: any[] = [];  // To store camps for organizers
+  bookedCamps: any[] = [];
+
 
   constructor(
 	private notificationService: NotificationService,
@@ -37,7 +39,9 @@ export class ProfileComponent implements OnInit {
         this.lastDonationDate = new Date(savedDate);
         this.updateProgress();
       }
-    } else if (this.userRole === 'organizer') {
+	  this.loadBookedCampsForDonor(); // Load booked camp info
+    } 
+	else if (this.userRole === 'organizer') {
       this.loadPublishedCamps();
     }
   }
@@ -115,6 +119,32 @@ export class ProfileComponent implements OnInit {
 		  width: '400px',
 		});
     }
+	
+	loadBookedCampsForDonor() {
+		const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+		const appointments = JSON.parse(localStorage.getItem('appointments_organizer') || '[]');
+		const camps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
+	  
+		// Filter appointments booked by the logged-in donor
+		const myAppointments = appointments.filter((appt: any) => appt.name === loggedInUser.fullName);
+	  
+		this.bookedCamps = myAppointments.map((appt: any) => {
+		  const camp = camps.find((c: any) => c.id === appt.campId);
+		  if (!camp) return null;
+	  
+		  const campDate = new Date(camp.date);
+		  const today = new Date();
+		  const diffTime = campDate.getTime() - today.getTime();
+		  const remainingDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+	  
+		  return {
+			...camp,
+			remainingDays: remainingDays > 0 ? remainingDays : 0,
+			location: camp.location,
+			date: camp.date
+		  };
+		}).filter((camp: any) => camp !== null);
+	  }
 	  
 
 }
