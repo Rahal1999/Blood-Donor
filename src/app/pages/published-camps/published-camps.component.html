@@ -32,17 +32,6 @@
 		</div>
 	</div>
 
-	<div class="appointments-section">
-		<h3>Manage Appointments</h3>
-		<div *ngFor="let appointment of appointments; let i = index" style="margin-bottom: 10px;">
-		<div style="display: flex; align-items: center; background-color: #4a63e7; padding: 10px; border-radius: 10px;">
-			<span style="color: white; flex: 1;">
-				{{ appointment.name }} made an appointment.
-			</span>
-			<button (click)="removeAppointment(i)" style="padding: 5px 10px;">Ok</button>
-		</div>
-	</div>
-
 </div>
 
 
