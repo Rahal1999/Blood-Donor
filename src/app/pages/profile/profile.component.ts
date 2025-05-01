@@ -60,17 +60,23 @@ export class ProfileComponent implements OnInit {
   }
 
   loadPublishedCamps() {
-    const camps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
-    this.publishedCamps = camps.map((camp: any) => {
-      const campDate = new Date(camp.date);
-      const today = new Date();
-      const diffTime = campDate.getTime() - today.getTime();
-      const remainingDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // round up
-
-      return {
-        ...camp,
-        remainingDays: remainingDays > 0 ? remainingDays : 0,
-      };
-    });
+	const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+	const camps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
+  
+	// Filter to only include camps created by the logged-in user
+	this.publishedCamps = camps
+	  .filter((camp: any) => camp.user === loggedInUser.fullName)
+	  .map((camp: any) => {
+		const campDate = new Date(camp.date);
+		const today = new Date();
+		const diffTime = campDate.getTime() - today.getTime();
+		const remainingDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+		
+		return {
+		  ...camp,
+		  remainingDays: remainingDays > 0 ? remainingDays : 0,
+		};
+	  });
   }
+  
 }
