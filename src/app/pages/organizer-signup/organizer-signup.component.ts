@@ -14,14 +14,22 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './organizer-signup.component.css'
 })
 export class OrganizerSignupComponent {
-  organizerForm = new FormGroup({
-    fullName: new FormControl('', Validators.required),
-    contactNumber: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    district: new FormControl('', Validators.required),
-    city: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-  });
+	organizerForm = new FormGroup({
+		fullName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+		contactNumber: new FormControl('', [
+		  Validators.required,
+		  Validators.pattern(/^\d{10}$/) // 10-digit phone number validation
+		]),
+		email: new FormControl('', [Validators.required, Validators.email]),
+		district: new FormControl('', Validators.required),
+		city: new FormControl('', Validators.required),
+		password: new FormControl('', [
+		  Validators.required,
+		  Validators.minLength(6)
+		])
+	});
+	  
+	  
 
   constructor(private router: Router, private snackBar: MatSnackBar) {}
 

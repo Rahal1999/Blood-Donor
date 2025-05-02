@@ -1,37 +1,74 @@
 <div class="signup-container">
 	<h2>Sign-up as a Donation camp Organizer<br>in DonorConnect online platform.</h2>
   
-	<form [formGroup]="organizerForm" (ngSubmit)="onSubmit()">
-	  <mat-form-field appearance="outline">
-		<mat-label>Full Name</mat-label>
-		<input matInput formControlName="fullName" />
-	  </mat-form-field>
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>Contact Number</mat-label>
-		<input matInput formControlName="contactNumber" />
-	  </mat-form-field>
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>Email Address</mat-label>
-		<input matInput formControlName="email" />
-	  </mat-form-field>
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>District</mat-label>
-		<input matInput formControlName="district" />
-	  </mat-form-field>
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>City</mat-label>
-		<input matInput formControlName="city" />
-	  </mat-form-field>
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>Password</mat-label>
-		<input matInput type="password" formControlName="password" />
-	  </mat-form-field>
-  
+	<form [formGroup]="organizerForm" (ngSubmit)="onSubmit()" class="form-feilds">
+		<div class="form-row">
+
+			<mat-form-field appearance="outline">
+				<mat-label>Full Name</mat-label>
+				<input matInput formControlName="fullName" />
+			  
+				@if (organizerForm.get('fullName')?.hasError('required')) {
+				  <mat-error>Full Name is required!</mat-error>
+				}
+			  
+				@if (organizerForm.get('fullName')?.hasError('minlength')) {
+				  <mat-error>Minimum 3 characters required</mat-error>
+				}
+			</mat-form-field>
+			  
+			<mat-form-field appearance="outline">
+				<mat-label>Contact Number</mat-label>
+				<input matInput formControlName="contactNumber" />
+				
+				<!-- Show error if Contact Number is invalid -->
+				@if (organizerForm.get('contactNumber')?.hasError('required')) {
+				  <mat-error>Contact number is required!</mat-error>
+				}
+			  
+				@if (organizerForm.get('contactNumber')?.hasError('pattern')) {
+				  <mat-error>Enter a valid 10-digit mobile number</mat-error>
+				}
+			</mat-form-field>
+			  
+			  
+			<mat-form-field appearance="outline">
+				<mat-label>Email Address</mat-label>
+				<input matInput formControlName="email" />
+			  
+				@if (organizerForm.get('email')?.hasError('email') && !organizerForm.get('email')?.hasError('required')) {
+				  <mat-error>Please enter a valid email address</mat-error>
+				}
+			  
+				@if (organizerForm.get('email')?.hasError('required')) {
+				  <mat-error>Email is required!</mat-error>
+				}
+			</mat-form-field>
+			  
+			<mat-form-field appearance="outline">
+				<mat-label>District</mat-label>
+				<input matInput formControlName="district" />
+			</mat-form-field>
+		
+			<mat-form-field appearance="outline">
+				<mat-label>City</mat-label>
+				<input matInput formControlName="city" />
+			</mat-form-field>
+		
+			<mat-form-field appearance="outline">
+				<mat-label>Password</mat-label>
+				<input matInput type="password" formControlName="password" />
+			  
+				@if (organizerForm.get('password')?.hasError('required')) {
+				  <mat-error>Password is required!</mat-error>
+				}
+			  
+				@if (organizerForm.get('password')?.hasError('minlength')) {
+				  <mat-error>Minimum 6 characters required</mat-error>
+				}
+			</mat-form-field>
+			    
+		</div>		
 	  <button mat-raised-button color="warn" type="submit" [disabled]="organizerForm.invalid">
 		Sign Up
 	  </button>

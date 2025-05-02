@@ -35,7 +35,7 @@ export class ConfirmAppointmentDialogComponent {
 			};
 	
 			const newOrganizerNotification = {
-				message: `🧾 ${camp.location} has been booked by the donor - ${loggedUser.fullName}`,
+				message: `Your Donation camp at 🧾 ${camp.location} has been booked by the donor - ${loggedUser.fullName}`,
 				time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
 				date: now.toISOString().split('T')[0],
 				user: camp.user,

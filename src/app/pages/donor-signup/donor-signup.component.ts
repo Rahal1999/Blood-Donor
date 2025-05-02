@@ -7,11 +7,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-donor-signup',
   standalone: true,
-  imports: [ CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule],
+  imports: [ CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule,MatDatepickerModule,MatNativeDateModule],
   templateUrl: './donor-signup.component.html',
   styleUrl: './donor-signup.component.css',
 })
@@ -23,14 +25,21 @@ export class DonorSignupComponent implements OnInit {
 
   ngOnInit() {
     this.donorForm = new FormGroup({
-      fullName: new FormControl('', Validators.required),
-      address: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      nic: new FormControl('', Validators.required),
-      bloodGroup: new FormControl('', Validators.required),
-      dob: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-    });
+		fullName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+		address: new FormControl('', Validators.required),
+		email: new FormControl('', [Validators.required, Validators.email]),
+		nic: new FormControl('', [
+		  Validators.required,
+		  Validators.pattern(/^[0-9]{9}[vVxX]$|^[0-9]{12}$/) // supports old & new NIC formats
+		]),
+		bloodGroup: new FormControl('', Validators.required),
+		dob: new FormControl('', Validators.required),
+		password: new FormControl('', [
+		  Validators.required,
+		  Validators.minLength(6)
+		]),
+	  });
+	  
 
     this.donorForm.get('bloodGroup')?.valueChanges.subscribe(val => {
       console.log('Selected blood group:', val);

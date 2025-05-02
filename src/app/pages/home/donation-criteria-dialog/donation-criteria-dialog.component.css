@@ -52,10 +52,15 @@ button:last-of-type:hover {
 
 .section-div {
 	display: flex;
-	justify-content: space-between;
-	gap: 12px;
-	margin-bottom: 20px;
-}
+	flex-wrap: wrap;
+	gap: 16px;
+  }
+  
+  .section-div mat-form-field {
+	flex: 1 1 45%; /* 2 fields per row with space */
+	min-width: 300px;
+  }
+  
 
 .button-group {
 	display: flex;
