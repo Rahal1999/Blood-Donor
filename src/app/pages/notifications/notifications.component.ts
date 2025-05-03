@@ -19,23 +19,28 @@ export class NotificationsComponent implements OnInit {
 
 	ngOnInit() {
 		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-		const storedNotifications = localStorage.getItem('notifications');
+		const storedNotifications = localStorage.getItem('notifications') || '{}';
 
 		if (this.userRole === 'organizer') {
 			const notifications_organizer = JSON.parse(localStorage.getItem('notifications_organizer') || '{}');
 			this.notifications = notifications_organizer.filter((notification: any) => notification.user === loggedUser.fullName);
 		} else {
-			if (storedNotifications) {
-				const allNotifications = JSON.parse(storedNotifications);
+			const allNotifications = JSON.parse(storedNotifications);
 
-				// Filter the notification list based on the logged in user
-				const userNotifications = allNotifications.filter((notification: any) => notification.user === loggedUser.fullName);
-				const organizerNotifications = JSON.parse(localStorage.getItem('notifications_donor') || '{}');
-
-				this.notifications = [...userNotifications, ...organizerNotifications];
-			} else {
-				this.notifications = []; // always make sure it's at least an array
+			let userNotifications = [];
+			let organizerNotifications = [];
+			// Filter the notification list based on the logged in user
+			if (allNotifications.length > 0) {
+				userNotifications = allNotifications?.filter((notification: any) => notification?.user === loggedUser?.fullName);
 			}
+
+			organizerNotifications = JSON.parse(localStorage.getItem('notifications_donor') || '{}');
+
+			if (organizerNotifications.length > 0) {
+				organizerNotifications = organizerNotifications?.filter((notification: any) => notification?.user === loggedUser?.fullName);
+			}
+
+			this.notifications = [...userNotifications, ...organizerNotifications];
 		}
 	}
 

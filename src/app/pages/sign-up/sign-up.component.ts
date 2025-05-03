@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-sign-up',
@@ -19,7 +20,7 @@ import { Router } from '@angular/router';
 export class SignUpComponent {
 	form: FormGroup;
 
-	constructor(private fb: FormBuilder, private router: Router) {
+	constructor(private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar) {
 		this.form = this.fb.group({
 			name: ['', [Validators.required]],
 			address: ['', [Validators.required]],
@@ -34,8 +35,12 @@ export class SignUpComponent {
 	onSubmit() {
 		if (this.form.invalid) return;
 
-		console.log('Donor Registered:', this.form.value);
-		alert('Sign-up Successful! ✅');
+		debugger;
+		this.snackBar.open('Sign-up Successful! ✅', '', {
+			duration: 3000,
+			verticalPosition: 'bottom',
+			horizontalPosition: 'center',
+		});
 
 		this.router.navigate(['/home']);
 		this.form.reset();

@@ -1,14 +1,16 @@
-<h2>Donation History</h2>
+<div class="header">
+	<h2>Donation History</h2>
+</div>
 
 <div class="dialog-content">
-  <ul *ngIf="data.history.length > 0; else noHistory">
-    <li *ngFor="let date of data.history">{{ date | date: 'fullDate' }}</li>
-  </ul>
-  <ng-template #noHistory>
-    <p>No donation history found.</p>
-  </ng-template>
+	<ul *ngIf="data.history.length > 0; else noHistory">
+		<li *ngFor="let date of data.history">{{ date | date : 'fullDate' }}</li>
+	</ul>
+	<ng-template #noHistory>
+		<p>No donation history found.</p>
+	</ng-template>
 </div>
 
 <div class="dialog-actions">
-  <button mat-button (click)="onClose()">Close</button>
+	<button mat-button (click)="onClose()">Close</button>
 </div>

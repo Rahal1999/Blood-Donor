@@ -10,19 +10,18 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class LayoutComponent implements OnInit {
 	userName: string | null = null;
-	
+
 	constructor(private router: Router) {}
 
 	ngOnInit() {
 		const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
-   		if (loggedInUser) {
-     		this.userName = loggedInUser.fullName; // Assuming 'fullName' is stored in the user object
-    	}
- 	}
+
+		if (loggedInUser) {
+			this.userName = loggedInUser.fullName; // Assuming 'fullName' is stored in the user object
+		}
+	}
 
 	navigateTo(route: string) {
 		this.router.navigate([route]);
 	}
 }
-
-  

@@ -29,10 +29,11 @@ import { NotificationService } from '../services/notification.service';
 })
 export class PublishCampDialogComponent {
 	campForm: FormGroup;
+	loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
 
 	constructor(private dialogRef: MatDialogRef<PublishCampDialogComponent>, private fb: FormBuilder, private notificationService: NotificationService) {
 		this.campForm = this.fb.group({
-			organizerName: ['', Validators.required],
+			organizerName: [this.loggedUser.fullName, Validators.required],
 			location: ['', Validators.required],
 			date: ['', Validators.required],
 			district: ['', Validators.required],
@@ -48,12 +49,10 @@ export class PublishCampDialogComponent {
 	}
 
 	onSubmit(): void {
-		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-
 		if (this.campForm.valid) {
 			const campDetails = this.campForm.value;
-			campDetails.user = loggedUser.fullName;
-	
+			campDetails.user = this.loggedUser.fullName;
+
 			// ✅ Add unique ID
 			campDetails.id = 'camp_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
 

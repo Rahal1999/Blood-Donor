@@ -1,87 +1,82 @@
 <div class="signup-container">
-	<h2>Sign-up as a Donor in <br />Donor Connect online platform.</h2>
-  
+	<h2>
+		Sign-up as a Donor in
+		<br />
+		Donor Connect online platform.
+	</h2>
+
 	<form [formGroup]="donorForm" (ngSubmit)="onSubmit()" class="form-feilds">
 		<div class="form-row">
-	  <mat-form-field appearance="outline">
-		<mat-label>Full Name</mat-label>
-		<input matInput formControlName="fullName" />
+			<mat-form-field appearance="outline">
+				<mat-label>Full Name</mat-label>
+				<input matInput formControlName="fullName" />
 
-		@if (donorForm.get('fullName')?.hasError('required')) {
-			<mat-error>Full Name is required!</mat-error>
-		  }
-		  @if (donorForm.get('fullName')?.hasError('minlength')) {
-			<mat-error>Minimum 3 characters required</mat-error>
-		}
-	  </mat-form-field>
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>Address</mat-label>
-		<input matInput formControlName="address" />
-		@if (donorForm.get('address')?.hasError('required')) {
-			<mat-error>Address is required!</mat-error>
-		}
-	  </mat-form-field>
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>Email</mat-label>
-		<input matInput formControlName="email" />
-		@if (donorForm.get('email')?.hasError('required')) {
-			<mat-error>Email is required!</mat-error>
-		}
-		  @if (donorForm.get('email')?.hasError('email')) {
-			<mat-error>Enter a valid email address</mat-error>
-		}
-	  </mat-form-field>
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>NIC Number</mat-label>
-		<input matInput formControlName="nic" />
-		@if (donorForm.get('nic')?.hasError('required')) {
-			<mat-error>NIC Number is required!</mat-error>
-		}
-	  </mat-form-field>
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>Blood Group</mat-label>
-		<mat-select formControlName="bloodGroup">
-		  <mat-option *ngFor="let group of bloodGroups" [value]="group">
-			{{ group }}
-		  </mat-option>
-		</mat-select>
-		@if (donorForm.get('bloodGroup')?.hasError('required')) {
-			<mat-error>Blood Group is required!</mat-error>
-		}
-	  </mat-form-field>
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>Date of Birth</mat-label>
-		<input matInput [matDatepicker]="picker" formControlName="dob" />
-		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-		<mat-datepicker #picker></mat-datepicker>
-		@if (donorForm.get('dob')?.hasError('required')) {
-		  <mat-error>Date of Birth is required!</mat-error>
-		}
-	  </mat-form-field>
-	  
-  
-	  <mat-form-field appearance="outline">
-		<mat-label>Password</mat-label>
-		<input matInput type="password" formControlName="password" />
-		@if (donorForm.get('password')?.hasError('required')) {
-			<mat-error>Password is required!</mat-error>
-		}
-		  @if (donorForm.get('password')?.hasError('minlength')) {
-			<mat-error>Password must be at least 6 characters</mat-error>
-		}
-	  </mat-form-field>
+				@if (donorForm.get('fullName')?.hasError('required')) {
+				<mat-error>Full Name is required!</mat-error>
+				} @if (donorForm.get('fullName')?.hasError('minlength')) {
+				<mat-error>Minimum 3 characters required</mat-error>
+				}
+			</mat-form-field>
 
+			<mat-form-field appearance="outline">
+				<mat-label>Address</mat-label>
+				<input matInput formControlName="address" />
+				@if (donorForm.get('address')?.hasError('required')) {
+				<mat-error>Address is required!</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Email</mat-label>
+				<input matInput formControlName="email" />
+				@if (donorForm.get('email')?.hasError('required')) {
+				<mat-error>Email is required!</mat-error>
+				} @if (donorForm.get('email')?.hasError('email')) {
+				<mat-error>Enter a valid email address</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>NIC Number</mat-label>
+				<input matInput formControlName="nic" />
+				@if (donorForm.get('nic')?.hasError('required')) {
+				<mat-error>NIC Number is required!</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Blood Group</mat-label>
+				<mat-select formControlName="bloodGroup">
+					<mat-option *ngFor="let group of bloodGroups" [value]="group">
+						{{ group }}
+					</mat-option>
+				</mat-select>
+				@if (donorForm.get('bloodGroup')?.hasError('required')) {
+				<mat-error>Blood Group is required!</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Date of Birth</mat-label>
+				<input matInput [matDatepicker]="picker" formControlName="dob" />
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+				@if (donorForm.get('dob')?.hasError('required')) {
+				<mat-error>Date of Birth is required!</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Password</mat-label>
+				<input matInput type="password" formControlName="password" />
+				@if (donorForm.get('password')?.hasError('required')) {
+				<mat-error>Password is required!</mat-error>
+				} @if (donorForm.get('password')?.hasError('minlength')) {
+				<mat-error>Password must be at least 6 characters</mat-error>
+				}
+			</mat-form-field>
 		</div>
-  
-	  <button mat-raised-button color="primary" type="submit" [disabled]="donorForm.invalid">
-		Sign Up
-	  </button>
-	
+
+		<button mat-raised-button color="primary" type="submit" [disabled]="donorForm.invalid">Sign Up</button>
 	</form>
 </div>
-  

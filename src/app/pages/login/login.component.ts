@@ -146,7 +146,7 @@ export class LoginComponent {
 			//localStorage.setItem('publishedCamps', JSON.stringify(this.camps));
 
 			this.router.navigate(['/home']);
-			this.snackBar.open('Login successful', '', {
+			this.snackBar.open('Login successful ✅', '', {
 				duration: 3000,
 				verticalPosition: 'bottom',
 				horizontalPosition: 'center',
