@@ -37,7 +37,10 @@ export class NotificationsComponent implements OnInit {
 			organizerNotifications = JSON.parse(localStorage.getItem('notifications_donor') || '{}');
 
 			if (organizerNotifications.length > 0) {
-				organizerNotifications = organizerNotifications?.filter((notification: any) => notification?.user === loggedUser?.fullName);
+				const filteredOrganizerNotifications = organizerNotifications.filter(
+					(notification: any) => notification?.user === loggedUser?.fullName || notification?.isNewCamp === true
+				);
+				organizerNotifications = filteredOrganizerNotifications;
 			}
 
 			this.notifications = [...userNotifications, ...organizerNotifications];

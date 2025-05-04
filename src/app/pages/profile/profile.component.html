@@ -1,50 +1,54 @@
 <div class="profile-container">
 	<div class="main-profile">
-	  <div class="header">
-		<h2>My Profile</h2>
-		<p>Welcome, {{ userName }}!</p>
-		<button class="history-btn" *ngIf="userRole === 'donor'" (click)="viewDonationHistory()">View donation history 🕒</button>
-	  </div>
-  
-	  <!-- Donor View: Donation Progress -->
-	  <div *ngIf="userRole === 'donor'">
-		<button class="donation-btn" (click)="recordDonation()">Donated blood today ❤️</button>
-		<div class="progress-card">
-		  <p>You have {{ daysRemaining }} days for your next donation</p>
-		  <div class="progress-bar">
-			<div class="filled" [style.width.%]="progressPercent"></div>
-		  </div>
-		  <p>{{ progressPercent }}%</p>
+		<div class="header">
+			<h2>My Profile</h2>
+			<p>Welcome, {{ userName }}!</p>
+			<button class="history-btn" *ngIf="userRole === 'donor'" (click)="viewDonationHistory()">View donation history 🕒</button>
 		</div>
 
-		<div *ngIf="bookedCamps.length > 0">
-			<h3>Your Booked Camps</h3>
-			<div *ngFor="let camp of bookedCamps" class="camp-card">
-			  <p><strong>Location:</strong> {{ camp.location }}</p>
-			  <p><strong>Date:</strong> {{ camp.date }}</p>
-			  <p><strong>Days Remaining:</strong> {{ camp.remainingDays }}</p>
+		<!-- Donor View: Donation Progress -->
+		<div *ngIf="userRole === 'donor'">
+			<button class="donation-btn" (click)="recordDonation()">Donated blood today ❤️</button>
+			<div class="progress-card">
+				<p>You have {{ daysRemaining }} days for your next donation</p>
+				<div class="progress-bar">
+					<div class="filled" [style.width.%]="progressPercent"></div>
+				</div>
+				<p>{{ progressPercent }}%</p>
+			</div>
+
+			<div *ngIf="bookedCamps.length > 0">
+				<h3 class="booked-camps-title">Your Booked Camps</h3>
+
+				<div *ngFor="let camp of bookedCamps" class="camp-card">
+					<p>
+						<strong>Location:</strong>
+						{{ camp.location }}
+					</p>
+					<p>
+						<strong>Date:</strong>
+						{{ camp.date }}
+					</p>
+					<p>
+						<strong>Days Remaining:</strong>
+						{{ camp.remainingDays }}
+					</p>
+				</div>
 			</div>
 		</div>
-		  
-	  </div>
-  
-	  <!-- Organizer View: Camp Details -->
-	  <div *ngIf="userRole === 'organizer'">
-		<h3>My Published Camps</h3>
-		<div *ngFor="let camp of publishedCamps" class="camp-card">
-		  <h4>{{ camp.location }}, {{ camp.city }}</h4>
-		  <p>Date: {{ camp.date }}</p>
-		  <p>Days remaining: {{ camp.remainingDays }}</p>
-		  <p>Total Appointments: {{ camp.appointmentCount }}</p>
-		  <div class="progress-bar">
-			<div 
-			  class="filled"
-			  [style.width.%]="((60 - camp.remainingDays) / 60) * 100"
-			  *ngIf="camp.remainingDays > 0"
-			></div>
-		  </div>
+
+		<!-- Organizer View: Camp Details -->
+		<div *ngIf="userRole === 'organizer'">
+			<h3>My Published Camps</h3>
+			<div *ngFor="let camp of publishedCamps" class="camp-card">
+				<h4>{{ camp.location }}, {{ camp.city }}</h4>
+				<p>Date: {{ camp.date }}</p>
+				<p>Days remaining: {{ camp.remainingDays }}</p>
+				<p>Total Appointments: {{ camp.appointmentCount }}</p>
+				<div class="progress-bar">
+					<div class="filled" [style.width.%]="((60 - camp.remainingDays) / 60) * 100" *ngIf="camp.remainingDays > 0"></div>
+				</div>
+			</div>
 		</div>
-	  </div>
 	</div>
-  </div>
-  
+</div>

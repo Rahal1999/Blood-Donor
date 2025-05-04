@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { NotificationService } from '../services/notification.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-publish-camp-dialog',
@@ -31,7 +31,7 @@ export class PublishCampDialogComponent {
 	campForm: FormGroup;
 	loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
 
-	constructor(private dialogRef: MatDialogRef<PublishCampDialogComponent>, private fb: FormBuilder, private notificationService: NotificationService) {
+	constructor(private dialogRef: MatDialogRef<PublishCampDialogComponent>, private fb: FormBuilder, private snackBar: MatSnackBar) {
 		this.campForm = this.fb.group({
 			organizerName: [this.loggedUser.fullName, Validators.required],
 			location: ['', Validators.required],
@@ -56,23 +56,50 @@ export class PublishCampDialogComponent {
 			// ✅ Add unique ID
 			campDetails.id = 'camp_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
 
-			// Store in localStorage
+			// Store in localStorage for existing camps
 			const existingCamps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
-			existingCamps.push(campDetails);
+			existingCamps.unshift(campDetails);
 			localStorage.setItem('publishedCamps', JSON.stringify(existingCamps));
 
-			// Notify the current organizer only
-			this.notificationService.setUserType('organizer');
-			const organizerMessage = `✅ Your camp at ${campDetails.location}, ${campDetails.city} has been published successfully.`;
-			this.notificationService.addNotification(organizerMessage);
+			// Store in localStorage for the organiser
+			const orgNotification = JSON.parse(localStorage.getItem('notifications_organizer') || '[]');
+			let notification = {
+				message: `✅ Your camp at ${campDetails.location}, ${campDetails.city} has been published successfully.`,
+				time: new Date().toLocaleString(),
+				user: this.loggedUser.fullName,
+			};
 
-			// Notify donors (they will see this next time they load)
-			this.notificationService.setUserType('donor');
-			const donorMessage = `🩸 New blood donation camp at ${campDetails.location}, ${campDetails.city} on ${campDetails.date}`;
-			this.notificationService.addNotification(donorMessage);
+			orgNotification.unshift(notification);
+			localStorage.setItem('notifications_organizer', JSON.stringify(orgNotification));
+
+			// Store in localStorage for the doners
+			const donorNotification = JSON.parse(localStorage.getItem('notifications_donor') || '[]');
+			let notificationDonor = {
+				message: `🩸 New blood donation camp at ${campDetails.location}, ${campDetails.city} on ${campDetails.date} for blood groups ${
+					this.campForm.get('bloodGroups')?.value
+				}`,
+				time: new Date().toLocaleString(),
+				user: this.loggedUser.fullName,
+				isNewCamp: true,
+			};
+
+			donorNotification.unshift(notificationDonor);
+			localStorage.setItem('notifications_donor', JSON.stringify(donorNotification));
+
+			this.snackBar.open('New camp published! ✅', '', {
+				duration: 3000,
+				verticalPosition: 'bottom',
+				horizontalPosition: 'center',
+			});
 
 			// Close dialog
 			this.dialogRef.close(campDetails);
+		} else {
+			this.snackBar.open('Invalid details!', '', {
+				duration: 3000,
+				verticalPosition: 'bottom',
+				horizontalPosition: 'center',
+			});
 		}
 	}
 }

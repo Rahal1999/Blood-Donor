@@ -77,7 +77,7 @@ export class HomeComponent {
 
 	openPublishDialog() {
 		const dialogRef = this.dialog.open(PublishCampDialogComponent, {
-			width: '400px',
+			width: '500px',
 			height: '500px',
 		});
 

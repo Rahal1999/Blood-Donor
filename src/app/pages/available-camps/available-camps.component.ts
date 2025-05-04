@@ -55,12 +55,6 @@ export class AvailableCampsComponent implements OnInit {
 				this.camps[index].booked = true;
 
 				const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-				// const bookedCampsKey = `bookedCamps_${loggedUser.fullName}`;
-
-				// // Save to localStorage
-				// const existingBooked = JSON.parse(localStorage.getItem(bookedCampsKey) || '[]');
-				// existingBooked.push(camp);
-				// localStorage.setItem(bookedCampsKey, JSON.stringify(existingBooked));
 
 				// Add `bookedBy` property and save to a separate list
 				const campWithBookedBy = { ...camp, bookedBy: loggedUser.fullName };
@@ -77,32 +71,3 @@ export class AvailableCampsComponent implements OnInit {
 		});
 	}
 }
-
-// export class AvailableCampsComponent implements OnInit {
-// 	camps: any[] = [];
-
-// 	constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {}
-
-// 	ngOnInit(): void {
-// 		this.camps = JSON.parse(localStorage.getItem('publishedCamps') || '[]');
-// 	}
-
-// 	onMakeAppointment(camp: any, index: number): void {
-// 		const dialogRef = this.dialog.open(ConfirmAppointmentDialogComponent, {
-// 			data: { camp },
-// 			width: '400px',
-// 			disableClose: true,
-// 		});
-
-// 		dialogRef.afterClosed().subscribe((confirmed) => {
-// 			if (confirmed) {
-// 				this.camps[index].booked = true;
-// 				this.snackBar.open('Appointment Confirmed!', 'Close', {
-// 					duration: 3000,
-// 					verticalPosition: 'bottom',
-// 					horizontalPosition: 'center',
-// 				});
-// 			}
-// 		});
-// 	}
-// }

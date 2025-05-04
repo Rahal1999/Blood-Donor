@@ -49,8 +49,18 @@ button[mat-button]:hover {
 
 .header {
 	padding: 20px 20px 0px 20px;
+	position: sticky;
+	top: 0;
+	background-color: white;
+	z-index: 1000;
 }
 
 .footer {
 	padding: 0px 20px 20px 20px;
+}
+
+.sections {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
 }
