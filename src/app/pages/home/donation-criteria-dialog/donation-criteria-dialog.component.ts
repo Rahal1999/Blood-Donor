@@ -60,7 +60,7 @@ export class DonationCriteriaDialogComponent {
 			isRecentDonation = lastDate > fourMonthsAgo;
 		}
 
-		const isEligible = ageVal > 18 && ageVal < 55 && weightVal > 50 && tattoo === 'no' && pregnant === 'no' && !isRecentDonation;
+		const isEligible = ageVal > 18 && ageVal < 60 && weightVal > 50 && tattoo === 'no' && pregnant === 'no' && !isRecentDonation;
 
 		const message = isEligible ? '✅ You are Eligible to donate' : '❌ You are Not eligible to donate';
 
