@@ -17,31 +17,31 @@ export class ConfirmAppointmentDialogComponent {
 	) {}
 
 	onConfirm(): void {
-		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-		const camp = this.data?.camp;
+		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}'); // get current logged-in user	
+		const camp = this.data?.camp; //get selected camp data to this component
 	
-		if (camp && loggedUser?.fullName) {
+		if (camp && loggedUser?.fullName) { // retreive existing notifications and appointments from local storage
 			const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
 			const notificationsOrganizer = JSON.parse(localStorage.getItem('notifications_organizer') || '[]');
 			const appointmentsOrganizer = JSON.parse(localStorage.getItem('appointments_organizer') || '[]');
 	
-			const now = new Date();
+			const now = new Date(); //get current date and time
 	
-			const newNotification = {
+			const newNotification = { // create new notification for the donor
 				message: `Donation camp at ${camp.location} has been booked`,
 				time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
 				date: now.toISOString().split('T')[0],
 				user: loggedUser.fullName,
 			};
 	
-			const newOrganizerNotification = {
+			const newOrganizerNotification = { // create new notification for the camp organizer
 				message: `Your Donation camp at 🧾 ${camp.location} has been booked by the donor - ${loggedUser.fullName}`,
 				time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
 				date: now.toISOString().split('T')[0],
 				user: camp.user,
 			};
 	
-			const newAppointment = {
+			const newAppointment = { //create new appointment record for the organizer
 				name: loggedUser.fullName,
 				campId: camp.id,
 				time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),

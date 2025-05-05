@@ -71,7 +71,7 @@ export class DonorSignupComponent implements OnInit {
 				horizontalPosition: 'center',
 			});
 
-			this.router.navigate(['/home']);
+			this.router.navigate(['/login']);
 		} else {
 			this.snackBar.open('Form is invalid!', '', {
 				duration: 3000,

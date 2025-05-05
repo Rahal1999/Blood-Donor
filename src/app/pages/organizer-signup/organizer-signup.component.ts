@@ -48,7 +48,7 @@ export class OrganizerSignupComponent {
 				horizontalPosition: 'center',
 			});
 
-			this.router.navigate(['/home']);
+			this.router.navigate(['/login']);
 		}
 	}
 }

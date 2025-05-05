@@ -70,27 +70,27 @@ export class AfterCareComponent implements OnInit {
 		});
 	}
 
-	checkForInactivity() {
-		const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+	checkForInactivity() { // method to check if donor submitted after-care data for today
+		const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null'); // get current logged-in user
 		if (!loggedInUser) return;
 
-		const afterCareDataKey = `afterCare_${loggedInUser.fullName}`;
-		const savedData = JSON.parse(localStorage.getItem(afterCareDataKey) || '{}');
+		const afterCareDataKey = `afterCare_${loggedInUser.fullName}`; //create unique key for each users after-care info
+		const savedData = JSON.parse(localStorage.getItem(afterCareDataKey) || '{}'); //retreving saved aftercare
 
 		const todayKey = this.days[this.days.length - 1].dateKey;
 
-		if (!savedData[todayKey]) {
+		if (!savedData[todayKey]) { //if no data submitted for the day, notify user
 			this.notificationService.setUserType('donor');
 			this.notificationService.addNotification(`You have not submitted your after-care data for today (${new Date().toDateString()}). Please update it!`);
 		}
 	}
 
-	submitAfterCare() {
-		const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+	submitAfterCare() { //submit donors after-care data 
+		const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null'); //get current logged-in user
 		if (!loggedInUser) return;
 
-		const afterCareDataKey = `afterCare_${loggedInUser.fullName}`;
-		const savedData = JSON.parse(localStorage.getItem(afterCareDataKey) || '{}');
+		const afterCareDataKey = `afterCare_${loggedInUser.fullName}`; //unique key for user's after-care data
+		const savedData = JSON.parse(localStorage.getItem(afterCareDataKey) || '{}'); //retreive or initialize data object
 
 		// Save data for all days
 		this.days.forEach((day) => {
@@ -98,7 +98,7 @@ export class AfterCareComponent implements OnInit {
 		});
 
 		savedData.user = loggedInUser.fullName;
-		localStorage.setItem(afterCareDataKey, JSON.stringify(savedData));
+		localStorage.setItem(afterCareDataKey, JSON.stringify(savedData));//store updated data into localstorage
 
 		// Send a notification to the donor
 		this.notificationService.setUserType('donor');
