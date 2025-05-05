@@ -18,13 +18,15 @@ export class NotificationsComponent implements OnInit {
 	userRole = localStorage.getItem('userRole');
 
 	ngOnInit() {
-		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+		const loggedUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}'); // Retrieve the logged-in user from localStorage
 		const storedNotifications = localStorage.getItem('notifications') || '{}';
 
+		// If the user is an organizer
 		if (this.userRole === 'organizer') {
 			const notifications_organizer = JSON.parse(localStorage.getItem('notifications_organizer') || '{}');
 			this.notifications = notifications_organizer.filter((notification: any) => notification.user === loggedUser.fullName);
 		} else {
+			//for donors
 			const allNotifications = JSON.parse(storedNotifications);
 
 			let userNotifications = [];
@@ -47,7 +49,7 @@ export class NotificationsComponent implements OnInit {
 		}
 	}
 
-	clearAll() {
+	clearAll() {  
 		const storedNotifications = localStorage.getItem('notifications') || '{}';
 		const storedUser = localStorage.getItem('loggedInUser') || '{}';
 

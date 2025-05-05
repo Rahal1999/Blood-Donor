@@ -19,19 +19,21 @@ export class PublishedCampsComponent implements OnInit {
 		const storedCamps = localStorage.getItem('publishedCamps') || '[]';
 		const allCamps = JSON.parse(storedCamps);
 	
-		this.camps = allCamps.filter((camp: any) => camp.user === loggedUser.fullName);
+		this.camps = allCamps.filter((camp: any) => camp.user === loggedUser.fullName); // Filter camps that were published by the logged-in organizer
+
 	
-		const storedAppointments = JSON.parse(localStorage.getItem('appointments_organizer') || '[]');
+		const storedAppointments = JSON.parse(localStorage.getItem('appointments_organizer') || '[]'); 	// Get all stored appointments for organizers from localStorage
+
 		this.appointments = storedAppointments.filter((appt: any) => appt.organizer === loggedUser.fullName);
 	}
 	
 
-	deleteCamp(index: number) {
+	deleteCamp(index: number) { // delete camp
 		this.camps.splice(index, 1);
 		localStorage.setItem('publishedCamps', JSON.stringify(this.camps));
 	}
 
-	removeAppointment(index: number) {
+	removeAppointment(index: number) { // remove appointment 
 		this.appointments.splice(index, 1);
 		localStorage.setItem('appointments_organizer', JSON.stringify(this.appointments));
 	}

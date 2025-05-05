@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 	templateUrl: './organizer-signup.component.html',
 	styleUrl: './organizer-signup.component.css',
 })
-export class OrganizerSignupComponent {
+export class OrganizerSignupComponent { // organizer signup validators
 	organizerForm = new FormGroup({
 		fullName: new FormControl('', [Validators.required, Validators.minLength(3)]),
 		contactNumber: new FormControl('', [
@@ -28,11 +28,12 @@ export class OrganizerSignupComponent {
 
 	constructor(private router: Router, private snackBar: MatSnackBar) {}
 
-	onSubmit() {
+	onSubmit() { 
 		if (this.organizerForm.valid) {
 			const organizer = this.organizerForm.value;
-			const users = JSON.parse(localStorage.getItem('users') || '[]');
+			const users = JSON.parse(localStorage.getItem('users') || '[]'); // Retrieve the existing users from localStorage (or initialize an empty array if none)
 
+			// Add the new organizer to the users array with relevant details
 			users.push({
 				username: organizer.email,
 				fullName: organizer.fullName,
@@ -40,7 +41,7 @@ export class OrganizerSignupComponent {
 				role: 'organizer',
 			});
 
-			localStorage.setItem('users', JSON.stringify(users));
+			localStorage.setItem('users', JSON.stringify(users)); // Save the updated users list back to localStorage
 
 			this.snackBar.open('Organizer account created successfully! ✅', '', {
 				duration: 3000,

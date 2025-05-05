@@ -22,13 +22,15 @@ export class HomeComponent {
 	userRole: 'donor' | 'organizer' | null = null;
 	options: { label: string; icon: string; route: string }[] = [];
 
-	donorOptions = [
+	//Features available for the Donor
+	donorOptions = [ 
 		{ label: 'Available Camps', icon: 'campaign', route: '/available-camps' },
 		{ label: 'Donation Criteria', icon: 'campaign', route: '/donation-criteria' },
 		{ label: 'After Care', icon: 'campaign', route: '/after-care' },
 		{ label: 'My Profile', icon: 'person', route: '/profile' },
 	];
 
+	//Features available for the camp organizer
 	organizerOptions = [
 		{ label: 'Publish Camps', icon: 'campaign', route: '/publish-camps' },
 		{ label: 'View Published Camps', icon: 'visibility', route: '/published-camps' },
@@ -40,7 +42,7 @@ export class HomeComponent {
 		console.log('Logged in user:', loggedInUser);
 
 		if (loggedInUser) {
-			this.userName = loggedInUser.fullName; // Assuming 'fullName' is stored in user data
+			this.userName = loggedInUser.fullName; // 'fullName' is stored in user data
 		}
 
 		this.userRole = this.authService.getUserRole();
@@ -48,7 +50,6 @@ export class HomeComponent {
 	}
 
 	onOptionSelect(option: any) {
-		// const selectedOption = this.options.find((opt) => opt.label.toLowerCase().replace(/\s+/g, '-') === option);
 
 		if (option?.label === 'Publish Camps') {
 			this.openPublishDialog();
@@ -68,6 +69,7 @@ export class HomeComponent {
 		}
 	}
 
+	//open donation criteria dialog box
 	openDonationCriteriaDialog() {
 		this.dialog.open(DonationCriteriaDialogComponent, {
 			width: '600px',

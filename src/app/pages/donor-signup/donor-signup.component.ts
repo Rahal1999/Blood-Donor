@@ -33,6 +33,7 @@ export class DonorSignupComponent implements OnInit {
 
 	constructor(private router: Router, private snackBar: MatSnackBar) {}
 
+	//adding validation checkers for donor forms
 	ngOnInit() {
 		this.donorForm = new FormGroup({
 			fullName: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -52,10 +53,11 @@ export class DonorSignupComponent implements OnInit {
 		});
 	}
 
-	onSubmit() {
+	onSubmit() { // Check if the donor registration form is valid
 		if (this.donorForm.valid) {
 			const formValue = this.donorForm.value;
 
+			// Retrieve existing users from localStorage (or initialize an empty array if none exist)
 			const users = JSON.parse(localStorage.getItem('users') || '[]');
 			users.push({
 				username: formValue.email,
@@ -63,7 +65,7 @@ export class DonorSignupComponent implements OnInit {
 				role: 'donor',
 				...formValue,
 			});
-			localStorage.setItem('users', JSON.stringify(users));
+			localStorage.setItem('users', JSON.stringify(users)); // Save the updated users list back to localStorage
 
 			this.snackBar.open('Donor registered successfully! ✅', '', {
 				duration: 3000,
